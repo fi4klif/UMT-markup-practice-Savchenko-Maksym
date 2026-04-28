@@ -1,0 +1,170 @@
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 32px;
+}
+
+.container {
+  max-width: 335px;
+}
+
+.section-wrapper {
+  padding: 64px 20px;
+}
+
+/* Button */
+
+.menu-btn {
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  padding: 8px 20px;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.menu-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+.bouquets-btn {
+  width: 340px;
+  height: 44px;
+}
+
+/* Header */
+
+.header-wrapper {
+  padding: 6px 20px;
+}
+
+.header-wrapper .container {
+  justify-content: space-between;
+}
+
+/* Hero */
+
+.hero-wrapper {
+  background-position: 50% center;
+  height: 510px;
+}
+
+.hero-info {
+  padding: 48px 20px 48px 0px;
+  width: 334px;
+}
+
+.hero-info h1 {
+  width: 242px;
+}
+
+.hero-info p {
+  width: 247px;
+}
+
+.hero-bottom {
+  height: 238px;
+}
+
+.hero-bottom button {
+  margin: 0;
+  width: 100%;
+}
+
+/*  Passion*/
+
+.passion-wrapper {
+  flex-direction: column;
+  gap: 24px;
+}
+
+/*  bestsellers  */
+
+.bestsellers-info {
+  gap: 32px;
+}
+
+.bestsellers-gallery {
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.bestsellers-gallery img {
+  align-items: center;
+}
+
+.bestsellers-nav {
+  margin-top: 32px;
+}
+
+.bestsellers-image {
+  height: 320px;
+}
+
+/* bouquets  */
+
+.bouquets-wrapper {
+  text-align: center;
+}
+
+.bouquets-gallery img {
+  align-items: center;
+}
+
+.bouquets-gallery li p:last-child {
+  margin-bottom: 24px;
+}
+
+/* feedback */
+
+.feedback-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.feedback-item blockquote {
+  width: 335px;
+  height: 228px;
+}
+
+/* Contacts */
+
+.contacts-wrapper {
+  align-items: center;
+}
+
+.contacts-info {
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.contacts-right {
+  width: 100%;
+}
+
+.contacts-left {
+  width: 100%;
+}
+
+.contacts-image {
+  height: 312px;
+}
+
+/*  Footer */
+
+footer .section-wrapper {
+  padding: 48px 20px;
+}
+
+.footer-wrapper {
+  text-align: center;
+}
+
+.social {
+  width: 40px;
+  height: 40px;
+}

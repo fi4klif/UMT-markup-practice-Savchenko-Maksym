@@ -1,6 +1,6 @@
-
-
 @import url(main.css);
-/* @import url(header.css);  */
-@import url(footer.css);
-@import url(container.css);
+@import url(reset.css);
+
+@import url("mobile.css");
+@import url("tablet.css") screen and (min-width: 768px);
+@import url("desktop.css") screen and (min-width: 1440px);

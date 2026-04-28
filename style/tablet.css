@@ -1,0 +1,145 @@
+h2 {
+  font-size: 34px;
+}
+
+.container {
+  max-width: 704px;
+}
+
+.section-wrapper {
+  padding: 64px 32px;
+}
+
+/*  Header */
+
+.header-wrapper {
+  padding: 32px 32px;
+}
+
+.header-wrapper-btn {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.header-btn {
+  display: flex;
+}
+
+header .nav-wrapper {
+  display: none;
+}
+
+.header-wrapper .container {
+  justify-content: space-between;
+}
+
+/* Hero */
+
+.hero-wrapper {
+  background-position: 60% center;
+  min-height: 768px;
+}
+
+.hero-info {
+  padding: 48px 32px 48px 0px;
+  width: 375px;
+}
+
+.hero-info h1 {
+  width: 343px;
+}
+
+.hero-info p {
+  width: 343px;
+}
+
+.hero-bottom {
+  height: 215px;
+}
+
+.hero-bottom button {
+  margin: 0;
+  width: fit-content;
+}
+
+/* Passion*/
+
+.passion-wrapper {
+  flex-direction: row;
+  gap: 24px;
+}
+
+.passion-info {
+  padding: 39px 0;
+}
+
+.passion-info p {
+  width: 340px;
+}
+
+.passion-image {
+  width: 340px;
+}
+
+/*  bestsellers */
+
+.bestsellers-gallery {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.bestsellers-gallery li {
+  flex-basis: calc(50% - 16px);
+}
+
+/* bouquets */
+
+.bouquets-row {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.bouquets-gallery ul {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+/* feedback */
+
+.feedback-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.feedback-item blockquote {
+  width: 340px;
+  height: 228px;
+}
+
+/* Comtacts */
+
+.contacts-right {
+  width: 340px;
+}
+
+.contacts-info {
+  flex-direction: row;
+  gap: 24px;
+}
+
+.contacts-image {
+  height: 396px;
+}
+
+/* footer  */
+
+.footer-top {
+  align-items: center;
+}
+
+.nav-wrapper ul {
+  flex-direction: row;
+}
