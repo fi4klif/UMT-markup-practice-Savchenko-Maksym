@@ -55,7 +55,7 @@ header .nav-wrapper {
 }
 
 .hero-bottom {
-  height: 215px;
+  min-height: 215px;
 }
 
 .hero-bottom button {
@@ -122,7 +122,7 @@ header .nav-wrapper {
 }
 
 .feedback-item blockquote {
-  height: 228px;
+  min-height: 228px;
 }
 
 /* Comtacts */

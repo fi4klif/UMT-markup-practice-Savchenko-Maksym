@@ -1,3 +1,14 @@
+:root {
+  --text-color: #030c01;
+  --footer-color: #eeee60;
+  --white-color: #ffffff;
+
+  --btn-active-color: #4e544d;
+  --dots-color: #030c01;
+  --link-color: #030c01;
+  --line-color: rgba(3, 12, 1, 0.15);
+}
+
 *,
 *::before,
 *::after {
@@ -12,7 +23,7 @@ body {
 }
 
 footer {
-  background-color: #eeee60;
+  background-color: var(--footer-color);
 }
 
 img {
@@ -22,7 +33,6 @@ img {
 }
 
 p {
-  font-family: "Roboto", sans-serif;
   font-weight: 400;
   line-height: 150%;
   letter-spacing: 0%;
@@ -46,7 +56,10 @@ h2 {
 h3 {
   font-size: 18px;
   font-weight: 600;
-  color: #030c01;
+}
+
+a {
+  color: var(--link-color);
 }
 
 .container {
@@ -103,7 +116,6 @@ h3 {
 
 .nav-wrapper a {
   text-decoration: none;
-  color: #030c01;
   font-size: 16px;
   font-weight: 400;
   line-height: 150%;
@@ -113,22 +125,22 @@ h3 {
 
 .link:hover {
   opacity: 60%;
-  transition: transform cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .link:focus-visible {
   opacity: 60%;
-  transition: transform cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .link:active {
   opacity: 40%;
-  transition: transform cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .link:disabled {
   opacity: 20%;
-  transition: transform cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Buttons */
@@ -142,15 +154,14 @@ h3 {
   background: linear-gradient(104.04deg, #e8e81c 0%, #42ed13 100%);
   border: none;
   border-radius: 100px;
-  font-family: "Roboto";
   font-size: 16px;
   font-weight: 500;
-  color: #030c01;
-  transition: transform cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--text-color);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn:hover {
-  transition: transform cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 50%;
   transform: scale(1.05);
 }
@@ -166,10 +177,10 @@ h3 {
 }
 
 .btn:active {
-  color: #ffffff;
-  background: #4e544d;
+  color: var(--white-color);
+  background: var(--btn-active-color);
   opacity: 100%;
-  transition: transform cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-paggination {
@@ -178,14 +189,14 @@ h3 {
   cursor: pointer;
   color: transparent;
 
-  background: #ffffff;
-  border: 1px solid rgba(3, 12, 1, 0.15);
+  background: var(--white-color);
+  border: 1px solid var(--text-color);
   border-radius: 100px;
 
   width: 48px;
   height: 48px;
 
-  transition: transform cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-paggination:hover {
@@ -196,7 +207,7 @@ h3 {
 .btn-paggination:focus-visible {
   opacity: 50%;
   transform: scale(1.05);
-  transition: transform cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-paggination:disabled {
@@ -205,10 +216,10 @@ h3 {
 }
 
 .btn-paggination:active {
-  color: #ffffff;
-  background: #4e544d;
+  color: var(--white-color);
+  background: var(--btn-active-color);
   opacity: 80%;
-  transition: transform cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .header-btn {
@@ -242,18 +253,19 @@ h3 {
   height: 8px;
   border-radius: 50%;
   border: none;
-  background-color: #d9d9d9;
+  background-color: var(--dots-color);
+  opacity: 20%;
   cursor: pointer;
   padding: 0;
-  transition: transform cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-dots.active {
-  background-color: #000000;
+  opacity: 100%;
 }
 
 .btn-dots:hover {
-  background-color: #aaaaaa;
+  opacity: 50%;
 }
 
 /*  Section */
@@ -264,8 +276,8 @@ h3 {
   padding: 0 80px;
   display: flex;
   border-radius: 1px;
-  border-bottom: #ffffff;
-  height: 72px;
+  border-bottom: var(--white-color);
+  min-height: 72px;
 }
 
 header .nav-wrapper {
@@ -296,14 +308,13 @@ header .nav-wrapper {
 
 .header-wrapper a {
   text-decoration: none;
-  color: #030c01;
 }
 
 /* Hero */
 
 .hero-wrapper {
   background-image: url("../img/hero-image.jpg");
-  background-color: #d9d9d9;
+  background-color: var(--white-color);
   background-size: cover;
   background-position: right center;
   background-repeat: no-repeat;
@@ -374,12 +385,12 @@ header .nav-wrapper {
 }
 
 .bestsellers-gallery::-webkit-scrollbar {
-  display: none; /* Ховаємо скролбар у Chrome/Safari */
+  display: none;
 }
 
 .bestsellers-gallery li {
-  flex: 0 0 100%; /* Кожна картка займає 100% ширини контейнера */
-  scroll-snap-align: center; /* Картка зупиняється рівно по центру */
+  flex: 0 0 100%;
+  scroll-snap-align: center;
 }
 
 .bestsellers-gallery li {
@@ -537,7 +548,7 @@ header .nav-wrapper {
 .contacts-left > p:last-child {
   font-size: 18px;
   line-height: 150%;
-  color: #030c01;
+  color: var(--link-color);
   margin: 0;
 }
 
@@ -567,13 +578,11 @@ header .nav-wrapper {
   font-weight: 400;
   line-height: 140%;
   letter-spacing: -0.01em;
-  color: #030c01;
+  color: var(--link-color);
 }
 
 .contacts-right a {
-  font-family: "Roboto", sans-serif;
   display: inline;
-  color: #030c01;
   font-size: 16px;
   font-weight: 400;
   line-height: 150%;
@@ -581,10 +590,8 @@ header .nav-wrapper {
 }
 
 .contacts-right address {
-  font-family: "Roboto", sans-serif;
   display: inline;
   text-decoration: none;
-  color: #030c01;
   font-size: 16px;
   font-weight: 400;
   line-height: 150%;
@@ -626,7 +633,7 @@ header .nav-wrapper {
   max-width: 1280px;
   padding-top: 32px;
   margin-top: 0;
-  border-top: 1px solid rgba(3, 12, 1, 0.15);
+  border-top: 1px solid var(--line-color);
   text-align: center;
 }
 
@@ -650,7 +657,7 @@ header .nav-wrapper {
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: #ffffff;
+  background-color: var(--white-color);
   z-index: 1000;
 
   opacity: 0;
@@ -693,7 +700,7 @@ header .nav-wrapper {
 
 .mob-nav {
   padding: 16px 20px 32px 20px;
-  gap: 10px;
+  gap: 24px;
   display: flex;
   flex-direction: column;
 }

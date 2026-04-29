@@ -49,7 +49,7 @@ h2 {
 
 .hero-wrapper {
   background-position: 50% center;
-  height: 510px;
+  min-height: 510px;
 }
 
 .hero-info {
@@ -66,7 +66,7 @@ h2 {
 }
 
 .hero-bottom {
-  height: 238px;
+  min-height: 238px;
 }
 
 .hero-bottom button {
@@ -79,6 +79,10 @@ h2 {
 .passion-wrapper {
   flex-direction: column;
   gap: 24px;
+}
+
+.passion-image {
+  width: 335px;
 }
 
 /*  bestsellers  */
@@ -124,7 +128,7 @@ h2 {
 }
 
 .feedback-item blockquote {
-  height: 228px;
+  min-height: 228px;
 }
 
 /* Contacts */
