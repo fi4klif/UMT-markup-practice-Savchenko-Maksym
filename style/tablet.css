@@ -109,13 +109,19 @@ header .nav-wrapper {
 /* feedback */
 
 .feedback-list {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  width: 100%;
+}
+
+.feedback-item {
+  flex: 0 0 calc(50% - 12px);
+  scroll-snap-align: start;
+}
+
+.bestsellers-gallery li {
+  flex: 0 0 calc(50% - 12px);
 }
 
 .feedback-item blockquote {
-  width: 340px;
   height: 228px;
 }
 
@@ -142,4 +148,22 @@ header .nav-wrapper {
 
 .nav-wrapper ul {
   flex-direction: row;
+}
+
+/* mob-menu  */
+
+.menu-wrapper {
+  padding: 32px 0;
+}
+
+.mob-nav {
+  text-align: center;
+}
+
+.menu-btn {
+  display: none;
+}
+
+.mob-nav-list {
+  gap: 24px;
 }

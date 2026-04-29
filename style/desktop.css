@@ -48,7 +48,7 @@ header .nav-wrapper {
   width: 667px;
 }
 
-.menu-btn {
+.menu-btn-open {
   display: none;
 }
 
@@ -148,19 +148,21 @@ header .nav-wrapper {
 
 /*feedback */
 
-.feedback-item blockquote {
-  width: 405px;
-  height: 228px;
+.feedback-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  overflow: hidden;
 }
 
 .feedback-item {
-  width: 405px;
-  height: 228px;
+  flex: unset;
 }
 
-.feedback-list {
-  grid-template-columns: repeat(3, 1fr);
+.feedback-item blockquote {
+  min-height: 228px;
 }
+
 /*contacts */
 
 .contacts-info {
@@ -210,4 +212,10 @@ footer .section-wrapper {
 .footer-socials {
   margin: 0;
   margin-left: auto;
+}
+
+/* mob-menu */
+
+.mob-menu {
+  display: none;
 }

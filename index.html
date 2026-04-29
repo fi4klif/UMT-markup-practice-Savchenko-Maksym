@@ -37,7 +37,7 @@
         </nav>
         <div class="header-wrapper-btn">
           <button class="btn header-btn" type="button">Explore Bouquets</button>
-          <button class="menu-btn" type="button">
+          <button class="menu-btn-open" type="button">
             <svg>
               <use href="icons/sprite.svg#menu"></use>
             </svg>
@@ -145,14 +145,22 @@
               </ul>
               <ul class="paggination">
                 <li>
-                  <button class="btn-paggination" type="button">
+                  <button
+                    class="btn-paggination"
+                    type="button"
+                    data-action="prev"
+                  >
                     <svg class="arrow">
                       <use href="icons/sprite.svg#left-arrow"></use>
                     </svg>
                   </button>
                 </li>
                 <li>
-                  <button class="btn-paggination" type="button">
+                  <button
+                    class="btn-paggination"
+                    type="button"
+                    data-action="next"
+                  >
                     <svg class="arrow">
                       <use href="icons/sprite.svg#right-arrow"></use>
                     </svg>
@@ -323,12 +331,12 @@
             </ul>
 
             <div class="paggination">
-              <button class="btn-paggination" type="button">
+              <button class="btn-paggination" type="button" data-action="prev">
                 <svg class="arrow">
                   <use href="icons/sprite.svg#left-arrow"></use>
                 </svg>
               </button>
-              <button class="btn-paggination" type="button">
+              <button class="btn-paggination" type="button" data-action="next">
                 <svg class="arrow">
                   <use href="icons/sprite.svg#right-arrow"></use>
                 </svg>
@@ -388,6 +396,31 @@
         </div>
       </section>
     </main>
+
+    <section id="mob-menu" class="mob-menu">
+      <div class="container">
+        <div class="menu-wrapper">
+          <svg class="header-logo">
+            <use href="icons/sprite.svg#logo"></use>
+          </svg>
+          <button class="menu-close-btn" type="button">
+            <svg>
+              <use href="icons/sprite.svg#x"></use>
+            </svg>
+          </button>
+        </div>
+        <nav class="mob-nav">
+          <ul class="mob-nav-list">
+            <li><a class="mob-link" href="main.html">About Us</a></li>
+            <li><a class="mob-link" href="#bestsellers">Bestsellers</a></li>
+            <li><a class="mob-link" href="#bouquets">Bouquets</a></li>
+            <li><a class="mob-link" href="#feedback">Feedback</a></li>
+            <li><a class="mob-link" href="#contacts">Contacts</a></li>
+          </ul>
+          <button class="btn menu-btn" type="button">Explore Bouquets</button>
+        </nav>
+      </div>
+    </section>
 
     <footer class="section-wrapper">
       <div class="container">
@@ -450,5 +483,8 @@
         </div>
       </div>
     </footer>
+
+    <script src="js/menu.js"></script>
+    <script src="js/scroll.js"></script>
   </body>
 </html>

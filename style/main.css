@@ -219,7 +219,7 @@ h3 {
   margin-left: auto;
 }
 
-.menu-btn {
+.menu-btn-open {
   width: 48px;
   height: 48px;
 }
@@ -364,18 +364,22 @@ header .nav-wrapper {
 }
 
 .bestsellers-gallery {
-  display: grid;
   gap: 24px;
 
+  display: flex;
   overflow-x: auto;
-  scroll-snap-type: x mandatory; /* Робить так, щоб картки "примагнічувались" */
-  scroll-behavior: smooth; /* Плавна прокрутка */
-  scrollbar-width: none; /* Ховає скролбар у Firefox */
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.bestsellers-gallery::-webkit-scrollbar {
+  display: none; /* Ховаємо скролбар у Chrome/Safari */
 }
 
 .bestsellers-gallery li {
-  scroll-snap-align: start; /* Точка примагнічування */
-  flex-shrink: 0; /* Забороняє карткам стискатися */
+  flex: 0 0 100%; /* Кожна картка займає 100% ширини контейнера */
+  scroll-snap-align: center; /* Картка зупиняється рівно по центру */
 }
 
 .bestsellers-gallery li {
@@ -465,13 +469,24 @@ header .nav-wrapper {
 }
 
 .feedback-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  width: 335px;
+  gap: 24px;
 }
 
-/* feedback */
+.feedback-list::-webkit-scrollbar {
+  display: none;
+}
+
 .feedback-item {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
   display: flex;
   flex-direction: column;
   border: 1px solid rgba(3, 12, 1, 0.15);
@@ -484,7 +499,9 @@ header .nav-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
+  width: 100%;
+  flex: 1;
+  min-height: 228px;
 }
 
 .feedback-item blockquote cite {
@@ -623,4 +640,66 @@ header .nav-wrapper {
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+/* Menu */
+
+.mob-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #ffffff;
+  z-index: 1000;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mob-menu.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.menu-btn {
+  padding: 8px 20px;
+  gap: 8px;
+}
+
+.menu-close-btn {
+  border: none;
+  background-color: transparent;
+  width: 48px;
+  height: 48px;
+}
+
+.menu-close-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+.menu-wrapper {
+  padding-left: 12px;
+  padding-right: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.mob-nav {
+  padding: 16px 20px 32px 20px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mob-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }

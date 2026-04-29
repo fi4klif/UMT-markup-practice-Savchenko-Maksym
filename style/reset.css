@@ -5,6 +5,10 @@ ol {
   margin: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   color: #030c01;
   margin: 0;
