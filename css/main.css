@@ -499,8 +499,8 @@ header .nav-wrapper {
   overflow-x: hidden;
   flex: 0 0 100%;
   scroll-snap-align: center;
-  width: 335px;
   gap: 24px;
+  width: 100%;
 }
 
 .feedback-list::-webkit-scrollbar {
@@ -515,6 +515,7 @@ header .nav-wrapper {
   border: 1px solid rgba(3, 12, 1, 0.15);
   border-radius: 16px;
   background: #ffffff;
+  max-width: 335px;
 }
 
 .feedback-item blockquote {

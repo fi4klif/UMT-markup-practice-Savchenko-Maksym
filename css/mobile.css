@@ -114,10 +114,6 @@ h2 {
   display: flex;
 }
 
-.feedback-item blockquote {
-  min-height: 228px;
-}
-
 /* Contacts */
 
 .contacts-wrapper {

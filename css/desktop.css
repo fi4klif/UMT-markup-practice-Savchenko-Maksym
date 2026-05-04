@@ -160,6 +160,7 @@ header .nav-wrapper {
 }
 
 .feedback-item {
+  min-width: 405px;
   flex: unset;
 }
 
