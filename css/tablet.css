@@ -13,7 +13,7 @@ h2 {
 /*  Header */
 
 .header-wrapper {
-  padding: 32px 32px;
+  padding: 0px 32px;
 }
 
 .header-wrapper-btn {
@@ -43,15 +43,15 @@ header .nav-wrapper {
 
 .hero-info {
   padding: 48px 32px 48px 0px;
-  width: 375px;
+  max-width: 375px;
 }
 
 .hero-info h1 {
-  width: 343px;
+  max-width: 343px;
 }
 
 .hero-info p {
-  width: 343px;
+  max-width: 343px;
 }
 
 .hero-bottom {
@@ -75,11 +75,11 @@ header .nav-wrapper {
 }
 
 .passion-info p {
-  width: 340px;
+  max-width: 340px;
 }
 
 .passion-image {
-  width: 340px;
+  max-width: 340px;
 }
 
 /*  bestsellers */
@@ -128,7 +128,8 @@ header .nav-wrapper {
 /* Comtacts */
 
 .contacts-right {
-  width: 340px;
+  max-width: 340px;
+  width: 100%;
 }
 
 .contacts-info {
@@ -153,7 +154,8 @@ header .nav-wrapper {
 /* mob-menu  */
 
 .menu-wrapper {
-  padding: 32px 0;
+  padding: 0;
+  min-height: 64px;
 }
 
 .mob-nav {

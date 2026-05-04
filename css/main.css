@@ -7,6 +7,10 @@
   --dots-color: #030c01;
   --link-color: #030c01;
   --line-color: rgba(3, 12, 1, 0.15);
+
+  --pagination-hover: #d9fbcf;
+  --pagination-active: #7af259;
+  --pagination-disabled: #030c0126;
 }
 
 *,
@@ -19,6 +23,10 @@ body {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   line-height: 150%;
+}
+
+body.no-scroll {
+  overflow: hidden;
 }
 
 footer {
@@ -72,12 +80,6 @@ a {
 .dots-wrapper {
   display: flex;
   gap: 8px;
-}
-
-.arrow {
-  width: 24px;
-  height: 24px;
-  fill: none;
 }
 
 .paggination {
@@ -141,6 +143,10 @@ a {
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.link-decoration {
+  text-decoration: underline;
+}
+
 /* Buttons */
 
 .btn {
@@ -181,9 +187,10 @@ a {
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.btn-paggination {
-  padding: 12px;
-  border-radius: 50%;
+.btn-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   color: transparent;
 
@@ -197,26 +204,34 @@ a {
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.btn-paggination:hover {
-  opacity: 50%;
-  transform: scale(1.05);
+.btn-pagination svg {
+  width: 24px;
+  height: 24px;
 }
 
-.btn-paggination:focus-visible {
-  opacity: 50%;
+.btn-pagination:hover {
+  background-color: var(--pagination-hover);
   transform: scale(1.05);
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.btn-paggination:disabled {
-  opacity: 20%;
+.btn-pagination:focus-visible {
+  background-color: var(--pagination-hover);
   transform: scale(1.05);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.btn-paggination:active {
+.btn-pagination:disabled {
+  opacity: 30%;
+  background-color: var(--pagination-disabled);
+  transform: scale(1.05);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-pggination:active {
   color: var(--white-color);
-  background: var(--btn-active-color);
-  opacity: 80%;
+  background-color: var(--pagination-active);
+  transform: scale(1.05);
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -229,8 +244,13 @@ a {
 }
 
 .menu-btn-open {
+  background-color: transparent;
   width: 48px;
   height: 48px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .bestsellers-btn {
@@ -242,8 +262,9 @@ a {
 }
 
 .bouquets-btn {
-  width: 340px;
-  height: 44px;
+  width: 100%;
+  max-width: 340px;
+  min-height: 44px;
 }
 
 .btn-dots {
@@ -374,12 +395,8 @@ header .nav-wrapper {
 
 .bestsellers-gallery {
   gap: 24px;
-
   display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
+  overflow-x: hidden;
 }
 
 .bestsellers-gallery::-webkit-scrollbar {
@@ -479,10 +496,7 @@ header .nav-wrapper {
 
 .feedback-list {
   display: flex;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
+  overflow-x: hidden;
   flex: 0 0 100%;
   scroll-snap-align: center;
   width: 335px;
@@ -584,15 +598,6 @@ header .nav-wrapper {
   font-size: 16px;
   font-weight: 400;
   line-height: 150%;
-  text-decoration: underline;
-}
-
-.contacts-right address {
-  display: inline;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 150%;
 }
 
 .contacts-right svg {
@@ -653,10 +658,13 @@ header .nav-wrapper {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background-color: var(--white-color);
-  z-index: 1000;
+  z-index: 9999;
+
+  overflow: hidden;
+  touch-action: none;
 
   opacity: 0;
   visibility: hidden;
@@ -673,11 +681,16 @@ header .nav-wrapper {
 }
 
 .menu-btn {
+  max-width: 335px;
+  width: 100%;
   padding: 8px 20px;
   gap: 8px;
 }
 
 .menu-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: none;
   background-color: transparent;
   width: 48px;
@@ -690,10 +703,10 @@ header .nav-wrapper {
 }
 
 .menu-wrapper {
+  justify-content: center;
   align-items: center;
-  padding-left: 12px;
-  padding-right: 20px;
   display: flex;
+  min-height: 64px;
   justify-content: space-between;
 }
 

@@ -15,7 +15,11 @@ h2 {
   height: 24px;
 }
 
-/* Hero */
+/* Header */
+
+.header-wrapper {
+  align-items: center;
+}
 
 .hero-wrapper {
   min-height: 669px;
@@ -36,16 +40,16 @@ header .nav-wrapper {
 }
 
 .hero-info {
-  width: 811px;
+  max-width: 811px;
   padding: 80px 0px;
 }
 
 .hero-info h1 {
-  width: 667px;
+  max-width: 667px;
 }
 
 .hero-info p {
-  width: 667px;
+  max-width: 667px;
 }
 
 .menu-btn-open {
@@ -63,11 +67,11 @@ header .nav-wrapper {
 }
 
 .passion-info p {
-  width: 600px;
+  max-width: 600px;
 }
 
 .passion-image {
-  width: 600px;
+  max-width: 600px;
 }
 
 /* bestsellers */
@@ -91,11 +95,11 @@ header .nav-wrapper {
 }
 
 .bestsellers-gallery li {
-  width: 405px;
+  max-width: 405px;
 }
 
 .bestsellers-image {
-  width: 405px;
+  max-width: 405px;
 }
 
 /* bouquets */
@@ -143,7 +147,7 @@ header .nav-wrapper {
 }
 
 .bouquets-btn {
-  width: 406px;
+  min-width: 406px;
 }
 
 /*feedback */
@@ -171,7 +175,7 @@ header .nav-wrapper {
 }
 
 .contacts-right {
-  width: 500px;
+  max-width: 500px;
 }
 
 .contacts-right div:first-of-type {

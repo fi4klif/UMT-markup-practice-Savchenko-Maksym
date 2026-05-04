@@ -162,22 +162,22 @@
               <ul class="paggination">
                 <li>
                   <button
-                    class="btn-paggination"
+                    class="btn-pagination"
                     type="button"
                     data-action="prev"
                   >
-                    <svg class="arrow">
+                    <svg>
                       <use href="icons/sprite.svg#left-arrow"></use>
                     </svg>
                   </button>
                 </li>
                 <li>
                   <button
-                    class="btn-paggination"
+                    class="btn-pagination"
                     type="button"
                     data-action="next"
                   >
-                    <svg class="arrow">
+                    <svg>
                       <use href="icons/sprite.svg#right-arrow"></use>
                     </svg>
                   </button>
@@ -371,13 +371,13 @@
             </ul>
 
             <div class="paggination">
-              <button class="btn-paggination" type="button" data-action="prev">
-                <svg class="arrow">
+              <button class="btn-pagination" type="button" data-action="prev">
+                <svg>
                   <use href="icons/sprite.svg#left-arrow"></use>
                 </svg>
               </button>
-              <button class="btn-paggination" type="button" data-action="next">
-                <svg class="arrow">
+              <button class="btn-pagination" type="button" data-action="next">
+                <svg>
                   <use href="icons/sprite.svg#right-arrow"></use>
                 </svg>
               </button>
@@ -406,7 +406,7 @@
                   </li>
                   <li>
                     <p>Phone</p>
-                    <a class="link" href="tel:+15551234567"
+                    <a class="link link-decoration" href="tel:+15551234567"
                       >+1 (555) 123-4567</a
                     >
                   </li>
@@ -419,9 +419,14 @@
                   </li>
                   <li>
                     <p>Store</p>
-                    <address class="link">
-                      456 Floral Ave, Sydney NSW 2000 AU
-                    </address>
+                    <a
+                      class="link"
+                      href="https://www.google.com/maps/search/?api=1&query=456+Floral+Ave,+Sydney+NSW+2000+AU"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <address>456 Floral Ave, Sydney NSW 2000 AU</address>
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -542,6 +547,7 @@
         anchorPlacement: "top-bottom",
         offset: 200,
       });
+      window.addEventListener("load", AOS.refresh);
     </script>
   </body>
 </html>
