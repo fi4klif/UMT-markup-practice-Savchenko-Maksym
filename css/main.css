@@ -228,7 +228,7 @@ a {
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.btn-pggination:active {
+.btn-pagination:active {
   color: var(--white-color);
   background-color: var(--pagination-active);
   transform: scale(1.05);
@@ -332,7 +332,7 @@ header .nav-wrapper {
 /* Hero */
 
 .hero-wrapper {
-  background-image: url("../image/hero-image.jpg");
+  background-image: url("../image/hero-image@1x.webp");
   background-color: var(--white-color);
   background-size: cover;
   background-position: right center;
@@ -340,6 +340,12 @@ header .nav-wrapper {
 
   display: flex;
   align-items: center;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .hero-wrapper {
+    background-image: url("../image/hero-image@2x.webp");
+  }
 }
 
 .hero-info {

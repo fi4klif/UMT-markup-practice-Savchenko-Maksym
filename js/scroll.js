@@ -1,4 +1,4 @@
-function initSlider(sectionSelector, listSelector) {
+export function initSlider(sectionSelector, listSelector) {
   const section = document.querySelector(sectionSelector);
   if (!section) return;
 
@@ -23,6 +23,3 @@ function initSlider(sectionSelector, listSelector) {
     });
   }
 }
-
-initSlider("#bestsellers", ".bestsellers-gallery");
-initSlider("#feedback", ".feedback-list");
