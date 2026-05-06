@@ -103,15 +103,24 @@
                 occasion.
               </p>
             </div>
-            <img
-              src="image/right-image@1x.jpg"
-              srcset="image/right-image@2x.webp 2x"
-              alt="passion Image"
-              class="passion-image"
-              width="600"
-              height="428"
-              data-aos="fade-left"
-            />
+            <picture>
+              <source
+                srcset="
+                  image/right-image-mob@1x.webp 1x,
+                  image/right-image-mob@2x.webp 2x
+                "
+                media="(max-width: 767px)"
+              />
+              <img
+                src="image/right-image@1x.jpg"
+                srcset="image/right-image@2x.webp 2x"
+                alt="passion Image"
+                class="passion-image"
+                width="600"
+                height="428"
+                data-aos="fade-left"
+              />
+            </picture>
           </div>
         </div>
       </section>
@@ -492,15 +501,24 @@
                 </ul>
               </div>
             </div>
-
-            <img
-              src="image/contact@1x.jpg"
-              srcset="image/contact@2x.webp 2x"
-              alt="Contact Image"
-              class="contacts-image"
-              width="1260"
-              height="720"
-            />
+            <picture>
+              <source
+                srcset="
+                  image/contact-mob@1x.webp 1x,
+                  image/contact-mob@2x.webp 2x
+                "
+                media="(max-width: 767px)"
+              />
+              <img
+                src="image/contact@1x.jpg"
+                srcset="image/contact@2x.webp 2x"
+                alt="Contact Image"
+                class="contacts-image"
+                width="1260"
+                height="720"
+                loading="lazy"
+              />
+            </picture>
           </div>
         </div>
       </section>

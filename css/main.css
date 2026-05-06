@@ -564,6 +564,18 @@ header .nav-wrapper {
   gap: 32px;
 }
 
+.contacts-wrapper picture {
+  width: 100%;
+  display: block;
+}
+.contacts-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  height: 312px;
+}
+
 .contacts-info {
   display: flex;
   align-items: center;
@@ -860,10 +872,6 @@ h2 {
   width: 100%;
 }
 
-.contacts-image {
-  height: 312px;
-}
-
 /* Footer */
 footer .section-wrapper {
   padding: 48px 20px;
@@ -954,7 +962,7 @@ footer .section-wrapper {
   }
 
   .passion-image {
-    max-width: 340px;
+    min-width: 340px;
   }
 
   /* Bestsellers */
