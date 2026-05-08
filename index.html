@@ -550,6 +550,52 @@
         </div>
       </div>
     </div>
+    <div id="modal-wrapper" class="modal-wrapper">
+      <div class="modal-container">
+        <button type="button" class="modal-close-btn" id="modal-close-btn">
+          <svg><use href="icons/sprite.svg#x"></use></svg>
+        </button>
+        <div class="modal-content-container"></div>
+      </div>
+    </div>
+
+    <div id="order-modal-wrapper" class="modal-wrapper">
+      <div class="modal-order-container">
+        <button type="button" class="modal-close-btn" id="modal-close-btn">
+          <svg><use href="icons/sprite.svg#x"></use></svg>
+        </button>
+        <div class="order-content-container">
+          <div class="order-wrapper">
+            <h2>Order</h2>
+            <ul class="order-info">
+              <li>
+                <p>Name*</p>
+                <input type="text" placeholder="Ann" required />
+              </li>
+              <li>
+                <p>Phone*</p>
+                <input type="tel" placeholder="+1 (555) 123-4567" required />
+              </li>
+              <li>
+                <p>Address</p>
+                <input
+                  type="text"
+                  placeholder="456 Floral Ave, Sydney NSW 2000 AU"
+                />
+              </li>
+              <li>
+                <p>Message</p>
+                <textarea placeholder="Type your message..."></textarea>
+              </li>
+
+              <button class="btn order-btn" type="submit">
+                Go to Checkout
+              </button>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <footer class="section-wrapper">
       <div class="container">
