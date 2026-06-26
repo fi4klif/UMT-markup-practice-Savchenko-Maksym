@@ -26,11 +26,11 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="icon" href="image/favicon.png" />
+    <link rel="icon" href="public/image/favicon.png" />
     <link
       rel="preload"
       as="image"
-      href="image/hero-image@1x.webp"
+      href="public/image/hero-image@1x.webp"
       fetchpriority="high"
     />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
@@ -106,14 +106,14 @@
             <picture>
               <source
                 srcset="
-                  image/right-image-mob@1x.webp 1x,
-                  image/right-image-mob@2x.webp 2x
+                  public/image/right-image-mob@1x.webp 1x,
+                  public/image/right-image-mob@2x.webp 2x
                 "
                 media="(max-width: 767px)"
               />
               <img
-                src="image/right-image@1x.jpg"
-                srcset="image/right-image@2x.webp 2x"
+                src="public/image/right-image@1x.jpg"
+                srcset="public/image/right-image@2x.webp 2x"
                 alt="passion Image"
                 class="passion-image"
                 width="600"
@@ -129,83 +129,13 @@
           <div class="bestsellers-wrapper">
             <h2>Top-Selling Bouquets</h2>
             <div class="bestsellers-info">
-              <ul class="bestsellers-gallery">
-                <li>
-                  <img
-                    src="image/lavender-dream@1x.jpg"
-                    srcset="image/lavender-dream@2x.webp 2x"
-                    alt="Lavender Dream"
-                    class="bestsellers-image"
-                    width="405"
-                    height="320"
-                    data-aos="fade-right"
-                  />
-                  <h3>Lavender Dream</h3>
-                  <p>
-                    A delicate blend of peonies, tulips, and roses — perfect for
-                    springtime gifting and bright smiles.
-                  </p>
-                  <p>$35</p>
-                </li>
-                <li>
-                  <img
-                    src="image/spring-elegance@1x.jpg"
-                    srcset="image/spring-elegance@2x.webp 2x"
-                    alt="Spring Elegance"
-                    class="bestsellers-image"
-                    width="405"
-                    height="320"
-                    data-aos="fade-up"
-                  />
-                  <h3>Spring Elegance</h3>
-                  <p>
-                    A stylish composition of roses, seasonal greenery, and
-                    vibrant berries — a bold and elegant floral statement.
-                  </p>
-                  <p>$40</p>
-                </li>
-                <li>
-                  <img
-                    src="image/berry-chic@1x.jpg"
-                    srcset="image/berry-chic@2x.webp 2x"
-                    alt="Berry Chic"
-                    class="bestsellers-image"
-                    width="405"
-                    height="320"
-                    data-aos="fade-left"
-                  />
-                  <h3>Berry Chic</h3>
-                  <p>
-                    A rich bouquet with lavender, lisianthus, and roses — ideal
-                    for those who love deep hues and gentle fragrance.
-                  </p>
-                  <p>$55</p>
-                </li>
+              <ul class="bestsellers-gallery" id="bestsellers-container">
+                <!-- Динамічно генеруються bestsellers -->
               </ul>
             </div>
             <div class="bestsellers-nav">
-              <ul class="dots-wrapper">
-                <li>
-                  <button
-                    class="btn-dots active"
-                    aria-label="go to slide 1"
-                  ></button>
-                </li>
-                <li>
-                  <button class="btn-dots" aria-label="go to slide 2"></button>
-                </li>
-                <li>
-                  <button class="btn-dots" aria-label="go to slide 3"></button>
-                </li>
-                <li>
-                  <button class="btn-dots" aria-label="go to slide 4"></button>
-                </li>
-                <li>
-                  <button class="btn-dots" aria-label="go to slide 5"></button>
-                </li>
-                <li>
-                  <button class="btn-dots" aria-label="go to slide 6"></button>
-                </li>
+              <ul class="dots-wrapper" id="bestsellers-dots">
+                <!-- Динамічно генеруються dots -->
               </ul>
               <ul class="paggination">
                 <li>
@@ -244,156 +174,17 @@
               <h2>Bouquets</h2>
               <p>Explore our stunning selection of fresh flower bouquets.</p>
             </div>
-            <div class="bouquets-row">
-              <div class="bouquets-gallery">
-                <ul>
-                  <li>
-                    <img
-                      src="image/peach-meadow@1x.jpg"
-                      srcset="image/peach-meadow@2x.webp 2x"
-                      alt="Peach Meadow"
-                      class="bouquets-image"
-                      width="296"
-                      height="296"
-                      data-aos="fade-right"
-                    />
-                    <h3>Peach Meadow</h3>
-                    <p>
-                      A soft and radiant arrangement of peach and blush roses
-                      with lush greenery in a straw basket — light and natural.
-                    </p>
-                    <p>$55</p>
-                  </li>
-                  <li>
-                    <img
-                      src="image/blush-romance@1x.jpg"
-                      srcset="image/berry-bloom@2x.webp 2x"
-                      alt="Blush Romance"
-                      class="bouquets-image"
-                      width="296"
-                      height="296"
-                      data-aos="fade-right"
-                    />
-                    <h3>Blush Romance</h3>
-                    <p>
-                      A premium bouquet of deep pink and ivory roses,
-                      complemented by silver eucalyptus — sophisticated and
-                      intimate.
-                    </p>
-                    <p>$34</p>
-                  </li>
-                  <li>
-                    <img
-                      src="image/pastel-garden@1x.jpg"
-                      srcset="image/pastel-garden@2x.webp 2x"
-                      alt="Pastel Garden"
-                      class="bouquets-image"
-                      width="296"
-                      height="296"
-                      data-aos="fade-left"
-                    />
-                    <h3>Pastel Garden</h3>
-                    <p>
-                      A pastel-toned mix of spray roses and greenery in a woven
-                      basket — gentle, airy, and perfect for any occasion.
-                    </p>
-                    <p>$40</p>
-                  </li>
-                  <li>
-                    <img
-                      src="image/tulip-charm@1x.jpg"
-                      srcset="image/tulip-charm@2x.webp 2x"
-                      alt="Tulip Charm"
-                      class="bouquets-image"
-                      width="296"
-                      height="296"
-                      data-aos="fade-left"
-                    />
-                    <h3>Tulip Charm</h3>
-                    <p>
-                      A vivid bouquet of bright tulips and roses in a lavender
-                      box — cheerful and full of charm.
-                    </p>
-                    <p>$61</p>
-                  </li>
-                </ul>
-              </div>
-              <div class="bouquets-gallery">
-                <ul>
-                  <li>
-                    <img
-                      src="image/berry-bloom@1x.jpg"
-                      srcset="image/berry-bloom@2x.webp 2x"
-                      alt="Berry Bloom"
-                      class="bouquets-image"
-                      width="296"
-                      height="296"
-                      data-aos="fade-right"
-                    />
-                    <h3>Berry Bloom</h3>
-                    <p>
-                      A lush mix of rich pink, purple, and cream blooms with
-                      textured greens — romantic and elegant.
-                    </p>
-                    <p>$32</p>
-                  </li>
-                  <li>
-                    <img
-                      src="image/sweet-whisper@1x.jpg"
-                      srcset="image/sweet-whisper@2x.webp 2x"
-                      alt="Sweet Whisper"
-                      class="bouquets-image"
-                      width="296"
-                      height="296"
-                      data-aos="fade-right"
-                    />
-                    <h3>Sweet Whisper</h3>
-                    <p>
-                      A charming spring bouquet with peonies, roses, and
-                      lilac-toned accents — fresh, lively, and expressive.
-                    </p>
-                    <p>$40</p>
-                  </li>
-                  <li>
-                    <img
-                      src="image/field-joy@1x.jpg"
-                      srcset="image/field-joy@2x.webp 2x"
-                      alt="Field Joy"
-                      class="bouquets-image"
-                      width="296"
-                      height="296"
-                      data-aos="fade-left"
-                    />
-                    <h3>Field Joy</h3>
-                    <p>
-                      A rustic hand-tied bouquet of sunflowers, lisianthus, and
-                      daisies — perfect for brightening the day.
-                    </p>
-                    <p>$49</p>
-                  </li>
-                  <li>
-                    <img
-                      src="image/soft-bloom@1x.jpg"
-                      srcset="image/soft-bloom@2x.webp 2x"
-                      alt="Soft Bloom"
-                      class="bouquets-image"
-                      width="296"
-                      height="296"
-                      data-aos="fade-left"
-                    />
-                    <h3>Soft Bloom</h3>
-                    <p>
-                      A delicate bouquet of pink carnations and roses wrapped in
-                      satin paper — soft, stylish, and versatile.
-                    </p>
-                    <p>$37</p>
-                  </li>
-                </ul>
-              </div>
+            <div class="bouquets-row" id="bouquets-container">
+              <!-- Динамічно генеруються bouquets -->
             </div>
           </div>
-          <button class="btn bouquets-btn" type="button" aria-label="show more">
-            Show More
+          <button
+            class="btn bouquets-btn"
+            type="button"
+            aria-label="show more"
+            id="bouquets-load-more"
+          >
+            Load More
           </button>
         </div>
       </section>
@@ -504,14 +295,14 @@
             <picture>
               <source
                 srcset="
-                  image/contact-mob@1x.webp 1x,
-                  image/contact-mob@2x.webp 2x
+                  public/image/contact-mob@1x.webp 1x,
+                  public/image/contact-mob@2x.webp 2x
                 "
                 media="(max-width: 767px)"
               />
               <img
-                src="image/contact@1x.jpg"
-                srcset="image/contact@2x.webp 2x"
+                src="public/image/contact@1x.jpg"
+                srcset="public/image/contact@2x.webp 2x"
                 alt="Contact Image"
                 class="contacts-image"
                 width="1260"
@@ -550,6 +341,7 @@
         </div>
       </div>
     </div>
+
     <div id="modal-wrapper" class="modal-wrapper">
       <div class="modal-container">
         <button type="button" class="modal-close-btn" id="modal-close-btn">
@@ -569,23 +361,79 @@
             <h2>Order</h2>
             <ul class="order-info">
               <li>
-                <p>Name*</p>
-                <input type="text" placeholder="Ann" required />
+                <label for="userName">Name*</label>
+                <div class="input-group">
+                  <input
+                    type="text"
+                    id="userName"
+                    name="userName"
+                    placeholder="Ann"
+                    required
+                  />
+                  <span class="error-message">Name is required</span>
+                </div>
               </li>
               <li>
-                <p>Phone*</p>
-                <input type="tel" placeholder="+1 (555) 123-4567" required />
+                <label for="userPhone">Phone*</label>
+                <div class="input-group">
+                  <input
+                    type="tel"
+                    id="userPhone"
+                    name="userPhone"
+                    placeholder="+1 (555) 123-4567"
+                    required
+                  />
+                  <span class="error-message"
+                    >Please enter a valid phone number</span
+                  >
+                </div>
               </li>
               <li>
-                <p>Address</p>
-                <input
-                  type="text"
-                  placeholder="456 Floral Ave, Sydney NSW 2000 AU"
-                />
+                <label for="userAddress">Address</label>
+                <div class="input-group">
+                  <input
+                    type="text"
+                    id="userAddress"
+                    name="userAddress"
+                    placeholder="456 Floral Ave, Sydney NSW 2000 AU"
+                  />
+                  <span class="error-message"
+                    >Please enter a valid address</span
+                  >
+                </div>
               </li>
               <li>
-                <p>Message</p>
-                <textarea placeholder="Type your message..."></textarea>
+                <label for="userMessage">Message</label>
+                <div class="input-group">
+                  <textarea
+                    name="userMessage"
+                    id="userMessage"
+                    placeholder="Type your message..."
+                  ></textarea>
+                </div>
+              </li>
+
+              <li class="checkbox-wrapper">
+                <label class="checkbox-label" for="orderAgreement">
+                  <input
+                    type="checkbox"
+                    id="orderAgreement"
+                    name="agreement"
+                    required
+                    class="checkbox-input"
+                  />
+                  <span class="checkbox-icon">
+                    <svg class="icon-unchecked">
+                      <use href="icons/sprite.svg#checkbox-unchecked"></use>
+                    </svg>
+                    <svg class="icon-checked" style="display: none">
+                      <use href="icons/sprite.svg#checkbox-checked"></use>
+                    </svg>
+                  </span>
+                  <span class="checkbox-text"
+                    >I agree to the Terms and Conditions</span
+                  >
+                </label>
               </li>
 
               <button class="btn order-btn" type="submit">
@@ -657,6 +505,48 @@
             </ul>
           </div>
 
+          <!-- <div class="subscription-form-wrapper">
+            <h3>Subscribe to Our Newsletter</h3>
+            <form class="subscription-form" id="subscription-form">
+              <label for="subscriptionEmail" class="sr-only"
+                >Email address</label
+              >
+              <div class="input-group">
+                <input
+                  type="email"
+                  id="subscriptionEmail"
+                  name="email"
+                  placeholder="Enter your email"
+                  required
+                />
+                <button type="submit" class="btn">Subscribe</button>
+              </div>
+              <div class="checkbox-wrapper">
+                <label class="checkbox-label" for="subscriptionAgreement">
+                  <input
+                    type="checkbox"
+                    id="subscriptionAgreement"
+                    name="agreement"
+                    required
+                    class="checkbox-input"
+                  />
+                  <span class="checkbox-icon">
+                    <svg class="icon-unchecked">
+                      <use href="icons/sprite.svg#checkbox-unchecked"></use>
+                    </svg>
+                    <svg class="icon-checked" style="display: none">
+                      <use href="icons/sprite.svg#checkbox-checked"></use>
+                    </svg>
+                  </span>
+                  <span class="checkbox-text"
+                    >I agree to the Privacy Policy</span
+                  >
+                </label>
+              </div>
+              <span class="error-message"></span>
+            </form>
+          </div> -->
+
           <div class="footer-bottom">
             <p>© 2025 Flora. All rights reserved.</p>
           </div>
@@ -664,7 +554,7 @@
       </div>
     </footer>
 
-    <script type="module" src="./js/main.js" defer></script>
+    <script type="module" src="/js/main.js" defer></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
       AOS.init({

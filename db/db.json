@@ -1,0 +1,136 @@
+{
+  "bestsellers": [
+    {
+      "id": 1,
+      "title": "Lavender Dream",
+      "description": "A delicate blend of peonies, tulips, and roses — perfect for springtime gifting and bright smiles.",
+      "price": 35,
+      "img1x": "public/image/lavender-dream@1x.jpg",
+      "img2x": "public/image/lavender-dream@2x.webp"
+    },
+    {
+      "id": 2,
+      "title": "Spring Elegance",
+      "description": "A stylish composition of roses, seasonal greenery, and vibrant berries — a bold and elegant floral statement.",
+      "price": 40,
+      "img1x": "public/image/spring-elegance@1x.jpg",
+      "img2x": "public/image/spring-elegance@2x.webp"
+    },
+    {
+      "id": 3,
+      "title": "Berry Chic",
+      "description": "A rich bouquet with lavender, lisianthus, and roses — ideal for those who love deep hues and gentle fragrance.",
+      "price": 55,
+      "img1x": "public/image/berry-chic@1x.jpg",
+      "img2x": "public/image/berry-chic@2x.webp"
+    }
+  ],
+  "bouquets": [
+    {
+      "id": 1,
+      "title": "Peach Meadow",
+      "description": "A soft and radiant arrangement of peach and blush roses with lush greenery in a straw basket — light and natural.",
+      "price": 55,
+      "img1x": "public/image/peach-meadow@1x.jpg",
+      "img2x": "public/image/peach-meadow@2x.webp 2x"
+    },
+    {
+      "id": 2,
+      "title": "Blush Romance",
+      "description": "A premium bouquet of deep pink and ivory roses, complemented by silver eucalyptus — sophisticated and intimate.",
+      "price": 34,
+      "img1x": "public/image/blush-romance@1x.jpg",
+      "img2x": "public/image/berry-bloom@2x.webp 2x"
+    },
+    {
+      "id": 3,
+      "title": "Pastel Garden",
+      "description": "A pastel-toned mix of spray roses and greenery in a woven basket — gentle, airy, and perfect for any occasion.",
+      "price": 40,
+      "img1x": "public/image/pastel-garden@1x.jpg",
+      "img2x": "public/image/pastel-garden@2x.webp 2x"
+    },
+    {
+      "id": 4,
+      "title": "Tulip Charm",
+      "description": "A vivid bouquet of bright tulips and roses in a lavender box — cheerful and full of charm.",
+      "price": 61,
+      "img1x": "public/image/tulip-charm@1x.jpg",
+      "img2x": "public/image/tulip-charm@2x.webp 2x"
+    },
+    {
+      "id": 5,
+      "title": "Berry Bloom",
+      "description": "A lush mix of rich pink, purple, and cream blooms with textured greens — romantic and elegant.",
+      "price": 32,
+      "img1x": "public/image/berry-bloom@1x.jpg",
+      "img2x": "public/image/berry-bloom@2x.webp 2x"
+    },
+    {
+      "id": 6,
+      "title": "Sweet Whisper",
+      "description": "A charming spring bouquet with peonies, roses, and lilac-toned accents — fresh, lively, and expressive.",
+      "price": 40,
+      "img1x": "public/image/sweet-whisper@1x.jpg",
+      "img2x": "public/image/sweet-whisper@2x.webp 2x"
+    },
+    {
+      "id": 7,
+      "title": "Field Joy",
+      "description": "A rustic hand-tied bouquet of sunflowers, lisianthus, and daisies — perfect for brightening the day.",
+      "price": 49,
+      "img1x": "public/image/field-joy@1x.jpg",
+      "img2x": "public/image/field-joy@2x.webp 2x"
+    },
+    {
+      "id": 8,
+      "title": "Soft Bloom",
+      "description": "A delicate bouquet of pink carnations and roses wrapped in satin paper — soft, stylish, and versatile.",
+      "price": 37,
+      "img1x": "public/image/soft-bloom@1x.jpg",
+      "img2x": "public/image/soft-bloom@2x.webp 2x"
+    }
+  ],
+  "feedback": [
+    {
+      "id": 1,
+      "author": "Emma T.",
+      "text": "Flora made my anniversary unforgettable with their beautiful arrangement!"
+    },
+    {
+      "id": 2,
+      "author": "Daniel R.",
+      "text": "Absolutely stunning bouquet! It looked even better than the photo and arrived right on time."
+    },
+    {
+      "id": 3,
+      "author": "Olivia M.",
+      "text": "The service was exceptional, and the flowers were fresh!"
+    },
+    {
+      "id": 4,
+      "author": "James L.",
+      "text": "I ordered for my mother's birthday and she was thrilled! The flowers lasted for two weeks, which is impressive. Highly recommend!"
+    },
+    {
+      "id": 5,
+      "author": "Sophie B.",
+      "text": "The attention to detail in every arrangement is remarkable. The packaging was also beautiful, making it perfect for gifting."
+    },
+    {
+      "id": 6,
+      "author": "Michael C.",
+      "text": "Fast delivery and professional handling. The bouquet was exactly as shown in the photos. Very satisfied with the quality and service!"
+    },
+    {
+      "id": 7,
+      "author": "Isabella K.",
+      "text": "Every flower was handpicked with care. The fragrance fills my entire room. Worth every penny!"
+    },
+    {
+      "id": 8,
+      "author": "David P.",
+      "text": "I've ordered from Flora multiple times now. They consistently deliver excellence and creativity. Their staff is incredibly helpful!"
+    }
+  ]
+}

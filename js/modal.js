@@ -1,4 +1,3 @@
-// Імпортуємо функцію з нашого нового файлу
 import { openOrderModal } from "./order.js";
 
 export default function initModal() {

@@ -29,10 +29,36 @@ export default function initOrderModal() {
   });
 
   const orderBtn = orderModalWrapper.querySelector(".order-btn");
+
+  const requiredInputs = orderModalWrapper.querySelectorAll("input[required]");
+
+  requiredInputs.forEach((input) => {
+    input.addEventListener("input", () => {
+      input.classList.remove("is-error");
+    });
+  });
+
   if (orderBtn) {
     orderBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      closeOrderModal();
+      let isValid = true;
+
+      requiredInputs.forEach((input) => {
+        const value = input.value.trim();
+
+        if (value === "") {
+          input.classList.add("is-error");
+          isValid = false;
+        }
+      });
+      if (isValid) {
+        console.log("Замовлення успішно оформлено!");
+
+        const allInputs = orderModalWrapper.querySelectorAll("input, textarea");
+        allInputs.forEach((input) => (input.value = ""));
+
+        closeOrderModal();
+      }
     });
   }
 }
