@@ -1,0 +1,16 @@
+:root {
+  --text-color: #030c01;
+  --footer-color: #eeee60;
+  --white-color: #ffffff;
+  --btn-active-color: #4e544d;
+  --dots-color: #030c01;
+  --link-color: #030c01;
+  --line-color: rgba(3, 12, 1, 0.15);
+  --pagination-hover: #d9fbcf;
+  --pagination-active: #7af259;
+  --pagination-disabled: #030c0126;
+  --quantity-border: #030c0126;
+  --error: #af0000;
+  --modal-bg: #00000040;
+  --placeholder: #030c0199;
+}

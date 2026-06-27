@@ -23,7 +23,10 @@ export default function initModal() {
     const parentItem = e.target.closest("li");
     if (!parentItem) return;
 
-    const title = parentItem.querySelector("h3").textContent;
+    const titleElement = parentItem.querySelector("h3");
+    if (!titleElement) return;
+    const title = titleElement.textContent;
+
     const text = parentItem.querySelector("p:first-of-type").textContent;
     const price = parentItem.querySelector("p:last-of-type").textContent;
 

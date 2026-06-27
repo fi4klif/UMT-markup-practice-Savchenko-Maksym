@@ -1,4 +1,4 @@
-:root {
+new:root {
   --text-color: #030c01;
   --footer-color: #eeee60;
   --white-color: #ffffff;
@@ -431,8 +431,7 @@ header .nav-wrapper {
 .hero-wrapper {
   background-image: url("../image/hero-image@1x.webp");
   background-color: var(--white-color);
-  background-size: cover;
-  background-position: right center;
+  background-position: 50%;
   background-repeat: no-repeat;
 
   display: flex;

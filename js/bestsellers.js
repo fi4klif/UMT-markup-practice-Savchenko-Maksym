@@ -2,30 +2,31 @@ import { apiClient } from "./apiClient.js";
 
 let bestsellersData = [];
 
-export async function initBestsellers() {
+export async function bootBestsellers() {
+  const listRef = document.getElementById("bestsellers-list");
+  if (!listRef) return;
+
   try {
-    showBestsellersLoading();
-
-    // Fetch bestsellers from the API
+    // Змінюємо шлях на той, що є в db.json
     const response = await apiClient.get("/bestsellers");
-    bestsellersData = response.data;
+    console.log("Відповідь від сервера:", response.data); // ДЕБАГ
 
-    if (!Array.isArray(bestsellersData)) {
-      throw new Error("Invalid bestsellers data format");
+    const data = response.data;
+    // Якщо db.json віддає масив, то allItems має бути саме він
+    const allItems = Array.isArray(data) ? data : (data?.bestsellers ?? []);
+
+    console.log("Дані для рендеру:", allItems); // ДЕБАГ
+
+    if (allItems.length === 0) {
+      console.warn("Масив даних порожній!");
     }
 
-    // Clear loading indicator
-    clearBestsellersLoading();
-
-    // Render bestsellers
-    renderBestsellers(bestsellersData);
-
-    // Initialize slider functionality (dots and pagination)
-    initBestsellersSlider(bestsellersData.length);
+    renderBestsellers(allItems);
   } catch (error) {
-    console.error("Error loading bestsellers:", error);
-    clearBestsellersLoading();
-    showBestsellersError("Failed to load bestsellers. Please try again later.");
+    console.error("Помилка запиту:", error);
+    showErrorNotification(
+      extractErrorMessage(error, "Unable to load top bouquets right now."),
+    );
   }
 }
 
@@ -199,22 +200,23 @@ function reinitializeModal() {
 function showBestsellersLoading() {
   const container = document.getElementById("bestsellers-container");
   if (container) {
+    // Вставляємо лоадер із shared.css, огорнутий у <li> (щоб не ламати сітку)
     container.insertAdjacentHTML(
       "beforeend",
-      '<li style="text-align: center; padding: 40px; font-size: 18px; grid-column: 1 / -1;">Loading bestsellers...</li>',
+      `<li id="bestsellers-loader" style="grid-column: 1 / -1; width: 100%; display: flex; justify-content: center; padding: 40px 0;">
+         <div class="content-loader">
+           <div class="content-loader__spinner"></div>
+         </div>
+       </li>`,
     );
   }
 }
 
 function clearBestsellersLoading() {
-  const container = document.getElementById("bestsellers-container");
-  if (container) {
-    const loadingElement = container.querySelector(
-      "li:has(> :not(img, h3, p))",
-    );
-    if (loadingElement && loadingElement.textContent.includes("Loading")) {
-      loadingElement.remove();
-    }
+  // Тепер просто шукаємо наш лоадер за його ID і видаляємо
+  const loadingElement = document.getElementById("bestsellers-loader");
+  if (loadingElement) {
+    loadingElement.remove();
   }
 }
 

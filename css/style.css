@@ -1,2 +1,5 @@
-@import url(reset.css);
-@import url(main.css);
+@import url("/css/reset.css");
+@import url("/css/color.css");
+@import url("/css/fonts.css");
+@import url("/css/shared.css");
+@import url("/css/main.css");

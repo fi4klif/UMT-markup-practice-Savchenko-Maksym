@@ -15,16 +15,25 @@ function buildNotification(message, variant) {
   const element = document.createElement("div");
   element.className = `notification notification--${variant}`;
   element.textContent = message;
-
   return element;
 }
 
-function showNotification(message) {
+// Додано export
+export function showErrorNotification(message) {
   const root = ensureNotificationRoot();
-  const notification = buildNotification(message, "error");
-  root.append(notification);
-  
+  const element = buildNotification(message, "error");
+  root.append(element);
+
   const dismiss = 1700;
 
-  window.setTimeout(() => element.remove, dismiss);
+  window.setTimeout(() => element.remove(), dismiss);
+}
+
+export function showSuccessNotification(message) {
+  const root = ensureNotificationRoot();
+  const element = buildNotification(message, "success");
+  root.append(element);
+
+  const dismiss = 1700;
+  window.setTimeout(() => element.remove(), dismiss);
 }
