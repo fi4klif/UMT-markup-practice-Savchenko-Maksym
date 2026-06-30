@@ -1,21 +1,21 @@
 import { initMenu } from "./menu.js";
-import { initSlider } from "./scroll.js";
-import initModals from "./modal.js";
+import initModal from "./modal.js";
+import initOrderModal from "./order.js";
 import { initCheckboxes } from "./checkbox.js";
-import { initSubscriptionForm } from "./subscription.js";
 import { initBouquets } from "./bouquets.js";
-import { bootBestsellers } from "./bestsellers.js";
+import { initBestsellers } from "./bestsellers.js";
+import { initFeedback } from "./feedback.js";
 import "./apiClient.js";
 import "./notifications.js";
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   initMenu();
-  initCheckboxes();
-  initSubscriptionForm();
-
   initBouquets();
-  bootBestsellers();
+  initModal();
 
-  initSlider("#feedback", ".feedback-list");
-  initModals();
+  await initBestsellers();
+  await initFeedback();
+
+  initOrderModal();
+  initCheckboxes();
 });

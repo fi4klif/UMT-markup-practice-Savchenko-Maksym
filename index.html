@@ -62,13 +62,14 @@
           </ul>
         </nav>
         <div class="header-wrapper-btn">
-          <button
+          <a
             class="btn header-btn"
             type="button"
             aria-label="Explore Bouquets"
+            href="#bouquets"
           >
             Explore Bouquets
-          </button>
+          </a>
           <button class="menu-btn-open" type="button" aria-label="open menu">
             <svg>
               <use href="icons/sprite.svg#menu"></use>
@@ -89,9 +90,9 @@
                 bouquet. Our expertly crafted arrangements are designed to bring
                 joy and elegance to your celebrations.
               </p>
-              <button class="btn bestsellers-btn" type="button">
+              <a class="btn bestsellers-btn" type="button" href="#bestsellers">
                 Explore Our Bestsellers
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -136,14 +137,24 @@
         <div class="container">
           <div class="bestsellers-wrapper">
             <h2>Top-Selling Bouquets</h2>
+            <div class="bestsellers-body" aria-busy="true">
+						<div
+							id="bestsellers-loader"
+							class="content-loader"
+							role="status"
+							aria-live="polite"
+							aria-label="Loading top bouquets"
+						>
+							<span class="content-loader__spinner" aria-hidden="true"></span>
+						</div>
             <div class="bestsellers-info">
               <ul class="bestsellers-gallery" id="bestsellers-container">
-                <!-- Динамічно генеруються bestsellers -->
+                <!-- generate bestsellers -->
               </ul>
             </div>
             <div class="bestsellers-nav">
               <ul class="dots-wrapper" id="bestsellers-dots">
-                <!-- Динамічно генеруються dots -->
+                <!-- generate dots -->
               </ul>
               <ul class="paggination">
                 <li>
@@ -182,51 +193,50 @@
               <h2>Bouquets</h2>
               <p>Explore our stunning selection of fresh flower bouquets.</p>
             </div>
-            <div class="bouquets-row" id="bouquets-container">
+            <div class="bouquets-list-shell" aria-busy="true">
+              <div
+                id="bouquets-loader"
+                class="content-loader"
+                role="status"
+                aria-live="polite"
+                aria-label="Loading bouquets"
+              >
+                <span class="content-loader__spinner" aria-hidden="true"></span>
+              </div>
+            </div>
+             <ul
+                class="bouquets-row"
+                id="bouquets-list"
+                aria-live="polite"
+              ></ul>
               <!-- Динамічно генеруються bouquets -->
             </div>
-          </div>
-          <button
+            <button
             class="btn bouquets-btn"
             type="button"
             aria-label="show more"
             id="bouquets-load-more"
-          >
-            Load More
+          >Show More
           </button>
+          </div>
         </div>
       </section>
       <section id="feedback" class="section-wrapper">
         <div class="container">
           <div class="feedback-wrapper">
             <h2>What our clients says</h2>
-            <ul class="feedback-list">
-              <li class="feedback-item" data-aos="fade-up">
-                <blockquote>
-                  <p>
-                    "Flora made my anniversary unforgettable with their
-                    beautiful arrangement!"
-                  </p>
-                  <cite>Emma T.</cite>
-                </blockquote>
-              </li>
-              <li class="feedback-item" data-aos="fade-up">
-                <blockquote>
-                  <p>
-                    Absolutely stunning bouquet! It looked even better than the
-                    photo and arrived right on time.
-                  </p>
-                  <cite>Daniel R.</cite>
-                </blockquote>
-              </li>
-              <li class="feedback-item" data-aos="fade-up">
-                <blockquote>
-                  <p>
-                    The service was exceptional, and the flowers were fresh!
-                  </p>
-                  <cite>Olivia M.</cite>
-                </blockquote>
-              </li>
+            <div class="bouquets-list-shell" aria-busy="true">
+              <div
+                id="feedback-loader"
+                class="content-loader"
+                role="status"
+                aria-live="polite"
+                aria-label="Loading bouquets"
+              >
+                <span class="content-loader__spinner" aria-hidden="true"></span>
+              </div>
+            </div>
+            <ul class="feedback-list" id="feedback-list">
             </ul>
 
             <div class="paggination">
@@ -234,6 +244,7 @@
                 class="btn-pagination"
                 type="button"
                 data-action="prev"
+                data-feedback-prev
                 aria-label="prev page"
               >
                 <svg>
@@ -243,6 +254,7 @@
               <button
                 class="btn-pagination"
                 type="button"
+                data-feedback-next
                 data-action="next"
                 aria-label="next page"
               >

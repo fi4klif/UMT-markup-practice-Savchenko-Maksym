@@ -1,232 +1,184 @@
 import { apiClient } from "./apiClient.js";
+import {
+  formatPriceUsd,
+  resolveImageUrl,
+  extractErrorMessage,
+  suppressHoverUntilLeave,
+} from "./utils.js";
+import { showErrorNotification } from "./notifications.js";
 
-let bestsellersData = [];
+const listRef = document.getElementById("bestsellers-container");
+const dotsRef = document.getElementById("bestsellers-dots");
+const loaderRef = document.getElementById("bestsellers-loader");
+const prevBtn = document.querySelector(
+  ".btn-pagination[aria-label='prev page']",
+);
+const nextBtn = document.querySelector(
+  ".btn-pagination[aria-label='next page']",
+);
+const body = document.querySelector(".bestsellers-body");
 
-export async function bootBestsellers() {
-  const listRef = document.getElementById("bestsellers-list");
-  if (!listRef) return;
+const mqDesktop = window.matchMedia("(min-width: 1440px)");
+const mqTablet = window.matchMedia("(min-width: 768px)");
 
-  try {
-    // Змінюємо шлях на той, що є в db.json
-    const response = await apiClient.get("/bestsellers");
-    console.log("Відповідь від сервера:", response.data); // ДЕБАГ
+let allItems = [];
+let currentPage = 0;
 
-    const data = response.data;
-    // Якщо db.json віддає масив, то allItems має бути саме він
-    const allItems = Array.isArray(data) ? data : (data?.bestsellers ?? []);
-
-    console.log("Дані для рендеру:", allItems); // ДЕБАГ
-
-    if (allItems.length === 0) {
-      console.warn("Масив даних порожній!");
-    }
-
-    renderBestsellers(allItems);
-  } catch (error) {
-    console.error("Помилка запиту:", error);
-    showErrorNotification(
-      extractErrorMessage(error, "Unable to load top bouquets right now."),
-    );
-  }
+function getVisibleCount() {
+  if (mqDesktop.matches) return 3;
+  if (mqTablet.matches) return 2;
+  return 1;
 }
 
-function renderBestsellers(bestsellers) {
-  const container = document.getElementById("bestsellers-container");
-  if (!container) return;
-
-  bestsellers.forEach((item) => {
-    const html = createBestsellerHTML(item);
-    container.insertAdjacentHTML("beforeend", html);
-  });
-
-  // Reinitialize modal listeners for new items
-  reinitializeModal();
+function getTotalPages() {
+  const visible = getVisibleCount();
+  if (visible === 0 || allItems.length === 0) return 1;
+  return Math.ceil(allItems.length / visible);
 }
 
-function createBestsellerHTML(item) {
-  const { id, title, description, price, img1x, img2x } = item;
+function createBestsellerHTML(product) {
+  const photoURL = product.photoURL || product.img1x;
+  const photoURL2x = product.photoURL2x || product.img2x;
+  const image1x = resolveImageUrl(photoURL);
+  const image2x = resolveImageUrl(photoURL2x);
+  const altText = product.alt ?? product.title ?? "";
 
   return `
-    <li data-id="${id}">
-      <img
-        src="${img1x}"
-        srcset="${img2x} 2x"
-        alt="${title}"
-        class="bestsellers-image"
-        width="405"
-        height="320"
-        data-aos="fade-up"
-      />
-      <h3>${title}</h3>
-      <p>${description}</p>
-      <p>$${price}</p>
+    <li class="product-item">
+      <article class="product-card" tabindex="0" role="button" data-product-trigger ${product.id != null ? `data-bouquet-id="${product.id}"` : ""}>
+        <img
+          loading="lazy"
+          class="bestsellers-card-image"
+          src="${image1x}"
+          ${image2x ? `srcset="${image2x} 2x"` : ""}
+          alt="${altText}"
+        />
+        <div class="product-card-content">
+          <div class="product-card-header">
+            <h3 class="product-card-title">${product.title ?? ""}</h3>
+            <p class="product-card-text">${product.description ?? ""}</p>
+          </div>
+          <p class="product-card-price">${formatPriceUsd(product.price)}</p>
+        </div>
+      </article>
     </li>
   `;
 }
 
-function initBestsellersSlider(itemCount) {
-  // Create dots dynamically
-  const dotsContainer = document.getElementById("bestsellers-dots");
-  if (dotsContainer) {
-    dotsContainer.innerHTML = "";
-    for (let i = 0; i < itemCount; i++) {
-      const dotHTML = `
-        <li>
-          <button
-            class="btn-dots ${i === 0 ? "active" : ""}"
-            aria-label="go to slide ${i + 1}"
-            data-slide="${i}"
-          ></button>
-        </li>
-      `;
-      dotsContainer.insertAdjacentHTML("beforeend", dotHTML);
+function renderPage() {
+  if (!listRef) return;
+
+  const visible = getVisibleCount();
+  const totalPages = getTotalPages();
+  currentPage = Math.max(0, Math.min(currentPage, totalPages - 1));
+
+  const start = currentPage * visible;
+  const slice = allItems.slice(start, start + visible);
+
+  listRef.innerHTML = slice.map(createBestsellerHTML).join("");
+
+  renderDots(totalPages);
+  updateNavState(totalPages);
+}
+
+function renderDots(totalPages) {
+  if (!dotsRef) return;
+  dotsRef.innerHTML = "";
+
+  const maxDots = 6;
+  const windowSize = Math.min(totalPages, maxDots);
+  let start = Math.max(0, currentPage - Math.floor(windowSize / 2));
+  const end = Math.min(totalPages, start + windowSize);
+  start = Math.max(0, end - windowSize);
+
+  for (let i = start; i < end; i += 1) {
+    const li = document.createElement("li");
+    const span = document.createElement("span");
+    span.className = "btn-dots";
+    if (i === currentPage) {
+      li.className = "active";
     }
+    li.dataset.page = String(i);
+    li.append(span);
+    dotsRef.append(li);
   }
+}
 
-  // Add click handlers to dots
-  const dots = document.querySelectorAll("#bestsellers-dots .btn-dots");
-  dots.forEach((dot) => {
-    dot.addEventListener("click", () => {
-      const slideIndex = parseInt(dot.getAttribute("data-slide"));
-      updateBestsellersSlide(slideIndex);
-    });
-  });
+function updateNavState(totalPages) {
+  if (prevBtn) prevBtn.disabled = currentPage <= 0;
+  if (nextBtn) nextBtn.disabled = currentPage >= totalPages - 1;
+}
 
-  // Add pagination button handlers
-  const prevBtn = document.querySelector(".paggination [data-action='prev']");
-  const nextBtn = document.querySelector(".paggination [data-action='next']");
-  let currentSlide = 0;
+function setLoading(isLoading) {
+  if (loaderRef) loaderRef.hidden = !isLoading;
+  if (body) body.setAttribute("aria-busy", isLoading ? "true" : "false");
+}
 
+function bindControls() {
   if (prevBtn) {
-    prevBtn.addEventListener("click", () => {
-      currentSlide = (currentSlide - 1 + itemCount) % itemCount;
-      updateBestsellersSlide(currentSlide);
+    prevBtn.addEventListener("click", (event) => {
+      if (currentPage > 0) {
+        currentPage -= 1;
+        renderPage();
+      }
+      suppressHoverUntilLeave(event.currentTarget);
     });
   }
 
   if (nextBtn) {
-    nextBtn.addEventListener("click", () => {
-      currentSlide = (currentSlide + 1) % itemCount;
-      updateBestsellersSlide(currentSlide);
+    nextBtn.addEventListener("click", (event) => {
+      if (currentPage < getTotalPages() - 1) {
+        currentPage += 1;
+        renderPage();
+      }
+      suppressHoverUntilLeave(event.currentTarget);
     });
   }
-}
 
-function updateBestsellersSlide(slideIndex) {
-  const container = document.getElementById("bestsellers-container");
-  const dots = document.querySelectorAll("#bestsellers-dots .btn-dots");
-  const items = container.querySelectorAll("li");
-
-  // Update dots
-  dots.forEach((dot, index) => {
-    if (index === slideIndex) {
-      dot.classList.add("active");
-    } else {
-      dot.classList.remove("active");
-    }
-  });
-
-  // Scroll to the item (simple approach - could be enhanced with smooth scrolling)
-  if (items[slideIndex]) {
-    items[slideIndex].scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-      inline: "start",
+  if (dotsRef) {
+    dotsRef.addEventListener("click", (event) => {
+      const li = event.target.closest("li[data-page]");
+      if (!li) return;
+      const page = Number.parseInt(li.dataset.page, 10);
+      if (Number.isFinite(page) && page !== currentPage) {
+        currentPage = page;
+        renderPage();
+      }
     });
   }
-}
 
-function reinitializeModal() {
-  const bestsellersContainer = document.querySelector(".bestsellers-gallery");
-
-  if (!bestsellersContainer) return;
-
-  const handleCardClick = (e) => {
-    const parentItem = e.target.closest("li");
-    if (!parentItem) return;
-
-    const title = parentItem.querySelector("h3").textContent;
-    const text = parentItem.querySelector("p:first-of-type").textContent;
-    const price = parentItem.querySelector("p:last-of-type").textContent;
-
-    const imgElement = parentItem.querySelector("img");
-    const src = imgElement.getAttribute("src");
-    const srcset = imgElement.getAttribute("srcset") || "";
-
-    const modalContent = document.querySelector(".modal-content-container");
-    const modalWrapper = document.getElementById("modal-wrapper");
-
-    const markup = `
-      <div class="modal-content-wrapper">
-        <img src="${src}" srcset="${srcset}" alt="${title}" />
-        <div class="modal-info">
-          <h2>${title}</h2>
-          <p class="modal-price">${price}</p>
-          <p class="modal-text">${text}</p>
-          <div class="modal-bottom">
-            <button id="open-order-btn" class="btn" type="button" aria-label="buy now">Buy now</button>
-            <input type="number" class="quantity-input" value="1" min="1" aria-label="кількість" />
-          </div>
-        </div>
-      </div>
-    `;
-
-    modalContent.innerHTML = markup;
-    modalWrapper.classList.add("is-open");
-    document.body.classList.add("modal-open");
-
-    const openOrderBtn = document.getElementById("open-order-btn");
-    if (openOrderBtn) {
-      openOrderBtn.addEventListener("click", () => {
-        modalWrapper.classList.remove("is-open");
-        document.body.classList.remove("modal-open");
-        const orderModalWrapper = document.getElementById(
-          "order-modal-wrapper",
-        );
-        if (orderModalWrapper) {
-          orderModalWrapper.classList.add("is-open");
-          document.body.classList.add("modal-open");
-        }
-      });
-    }
+  const reRender = () => {
+    const visible = getVisibleCount();
+    const firstVisibleIndex = currentPage * visible;
+    currentPage = Math.floor(firstVisibleIndex / visible);
+    renderPage();
   };
 
-  // Remove old listener
-  bestsellersContainer.removeEventListener("click", handleCardClick);
-  // Add new listener
-  bestsellersContainer.addEventListener("click", handleCardClick);
+  mqDesktop.addEventListener("change", reRender);
+  mqTablet.addEventListener("change", reRender);
 }
 
-function showBestsellersLoading() {
-  const container = document.getElementById("bestsellers-container");
-  if (container) {
-    // Вставляємо лоадер із shared.css, огорнутий у <li> (щоб не ламати сітку)
-    container.insertAdjacentHTML(
-      "beforeend",
-      `<li id="bestsellers-loader" style="grid-column: 1 / -1; width: 100%; display: flex; justify-content: center; padding: 40px 0;">
-         <div class="content-loader">
-           <div class="content-loader__spinner"></div>
-         </div>
-       </li>`,
+export async function initBestsellers() {
+  if (!listRef) {
+    setLoading(false);
+    return;
+  }
+
+  setLoading(true);
+
+  try {
+    const response = await apiClient.get("/bestsellers");
+    const data = response.data;
+    allItems = Array.isArray(data) ? data : (data?.data ?? []);
+    currentPage = 0;
+    renderPage();
+  } catch (error) {
+    showErrorNotification(
+      extractErrorMessage(error, "Unable to load bestsellers right now."),
     );
+  } finally {
+    setLoading(false);
   }
-}
 
-function clearBestsellersLoading() {
-  // Тепер просто шукаємо наш лоадер за його ID і видаляємо
-  const loadingElement = document.getElementById("bestsellers-loader");
-  if (loadingElement) {
-    loadingElement.remove();
-  }
-}
-
-function showBestsellersError(message) {
-  const container = document.getElementById("bestsellers-container");
-  if (container) {
-    container.innerHTML = "";
-    container.insertAdjacentHTML(
-      "beforeend",
-      `<li style="text-align: center; padding: 40px; font-size: 18px; color: #af0000; grid-column: 1 / -1;">${message}</li>`,
-    );
-  }
+  bindControls();
 }

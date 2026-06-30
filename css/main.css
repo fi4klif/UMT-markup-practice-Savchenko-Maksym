@@ -159,6 +159,7 @@ textarea.is-error + .error-message {
 }
 
 .dots-wrapper {
+  display: inline-block;
   display: flex;
   gap: 8px;
 }
@@ -356,33 +357,18 @@ textarea.is-error + .error-message {
 }
 
 .btn-dots {
+  display: block;
   width: 8px;
   height: 8px;
   border-radius: 50%;
   border: none;
   background-color: var(--dots-color);
   opacity: 20%;
-  cursor: pointer;
-  padding: 0;
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.btn-dots::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 44px;
-  height: 44px;
-}
-
-.btn-dots.active {
+.dots-wrapper li.active .btn-dots {
   opacity: 100%;
-}
-
-.btn-dots:hover {
-  opacity: 50%;
 }
 
 /*  Section */
@@ -488,6 +474,8 @@ header .nav-wrapper {
 .bestsellers-info {
   display: flex;
   flex-direction: column;
+
+  gap: 32px;
 }
 
 .bestsellers-gallery {
@@ -500,34 +488,44 @@ header .nav-wrapper {
   display: none;
 }
 
-.bestsellers-gallery li {
+.bestsellers-card-image {
+  height: 320px;
+  width: 335px;
+}
+/*  Product  */
+
+.product-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0px;
+}
+
+.product-item {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
   flex: 0 0 100%;
   scroll-snap-align: center;
 }
 
-.bestsellers-gallery li {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-}
-
-.bestsellers-gallery h3 {
+.product-card-title {
   margin-top: 16px;
 }
 
-.bestsellers-gallery li p {
+.product-card-text {
   margin-bottom: 16px;
   font-size: 14px;
 }
 
-.bestsellers-gallery li p:last-child {
+.product-card-price {
   font-size: 20px;
   font-weight: 600;
   margin: 0;
 }
 
 .bestsellers-nav {
-  margin-top: 48px;
+  margin-top: 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -547,6 +545,7 @@ header .nav-wrapper {
   flex-direction: column;
   align-items: center;
   gap: 32px;
+  text-align: center;
 }
 
 .bouquets-info {
@@ -563,46 +562,32 @@ header .nav-wrapper {
   flex-direction: column;
 }
 
-.bouquets-gallery-item {
+.bouquets-item {
   width: 100%;
 }
 
-.bouquets-gallery-item ul {
-  display: flex;
-  gap: 24px;
-  flex-direction: column;
+.bouquets-item .product-card {
+  text-align: center;
+  align-items: stretch;
 }
 
-.bouquets-gallery ul {
-  display: flex;
-  gap: 24px;
-  flex-direction: column;
+.bouquets-item .product-card-content {
+  align-items: center;
 }
 
-.bouquets-image {
+.bouquets-item .product-card-header {
+  align-items: center;
+}
+
+.bouquets-item .product-card-title {
+  letter-spacing: -0.01em;
+}
+
+.bouquets-card-image {
+  width: 335px;
   height: 296px;
   object-fit: cover;
 }
-
-.bouquets-gallery h3 {
-  margin-top: 16px;
-}
-
-.bouquets-gallery li {
-  text-align: center;
-}
-
-.bouquets-gallery li p {
-  margin-bottom: 16px;
-  font-size: 14px;
-}
-
-.bouquets-gallery li p:last-child {
-  font-size: 20px;
-  font-weight: 600;
-  margin: 0;
-}
-
 /* feedback */
 
 .feedback-wrapper {
@@ -1181,29 +1166,6 @@ h2 {
   width: 100%;
 }
 
-/* Bestsellers */
-.bestsellers-info {
-  gap: 32px;
-}
-
-.bestsellers-nav {
-  margin-top: 32px;
-}
-
-.bestsellers-image {
-  height: 320px;
-}
-
-/* Bouquets */
-.bouquets-wrapper {
-  text-align: center;
-}
-
-/* Feedback */
-.feedback-list {
-  display: flex;
-}
-
 /* Contacts */
 .contacts-wrapper {
   align-items: center;
@@ -1323,13 +1285,8 @@ footer .section-wrapper {
   }
 
   /* Bouquets */
-  .bouquets-row {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
 
-  .bouquets-gallery ul {
+  .bouquets-row {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
@@ -1341,10 +1298,6 @@ footer .section-wrapper {
     max-width: 340px;
     flex: 0 0 calc(50% - 12px);
     scroll-snap-align: start;
-  }
-
-  .bestsellers-gallery li {
-    flex: 0 0 calc(50% - 12px);
   }
 
   /* Contacts */
@@ -1527,51 +1480,38 @@ footer .section-wrapper {
     gap: 32px;
   }
 
-  .bestsellers-gallery li {
-    max-width: 100%;
-  }
-
-  .bestsellers-image {
-    max-width: 100%;
+  .bestsellers-card-image {
+    width: 100%;
   }
 
   /* Bouquets */
+  .bouquets-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    row-gap: 64px;
+    width: 100%;
+  }
+
   .bouquets-wrapper > p {
     font-size: 18px;
     text-align: center;
   }
 
-  .bouquets-row {
-    display: flex;
-    flex-direction: column;
-    gap: 64px;
-    width: 100%;
-  }
-
-  .bouquets-gallery {
-    width: 100%;
-  }
-
-  .bouquets-gallery li,
-  .bouquets-gallery li h3,
-  .bouquets-gallery li p {
+  .bouquets-item li,
+  .bouquets-item li h3,
+  .bouquets-item li p {
     text-align: center;
     width: 100%;
   }
 
-  .bouquets-gallery ul {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 32px;
-  }
-
-  .bouquets-gallery li {
+  .bouquets-item {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .bouquets-image {
+  .bouquets-card-image {
     width: 100%;
     height: 296px;
   }

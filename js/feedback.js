@@ -4,11 +4,11 @@ import { extractErrorMessage, suppressHoverUntilLeave } from "./utils.js";
 
 const listRef = document.getElementById("feedback-list");
 const loaderRef = document.getElementById("feedback-loader");
-const container = document.querySelector(".feedback-container");
+const body = document.querySelector(".feedback-wrapper");
 const prevBtn = document.querySelector("[data-feedback-prev]");
 const nextBtn = document.querySelector("[data-feedback-next]");
 
-const mqDesktop = window.matchMedia("(min-width: 1440px)");
+export const mqDesktop = window.matchMedia("(min-width: 1440px)");
 const mqTablet = window.matchMedia("(min-width: 768px)");
 
 let allItems = [];
@@ -26,31 +26,15 @@ function getTotalPages() {
   return Math.ceil(allItems.length / visible);
 }
 
-function buildItemMarkup() {
+function buildItemMarkup(item) {
   return `
-		<li class="feedback-item">
-			<blockquote class="feedback-quote">
-				<p class="feedback-quote-text"></p>
-			</blockquote>
-			<p class="feedback-author"></p>
-		</li>`;
+        <li class="feedback-item">
+            <blockquote>
+                <p> ${item.text ?? ""}</p>
+                <cite> ${item.author ?? ""}</cite>
+            </blockquote> 
+        </li>`;
 }
-
-function fillItem(li, feedback, isFirst) {
-  li.setAttribute("data-feedback-id", String(feedback.id ?? ""));
-  const text = feedback.text ?? "";
-
-  li.querySelector(".feedback-quote-text").textContent = isFirst
-    ? `“${text}”`
-    : text;
-
-  const author = feedback.author ?? "";
-  const location = feedback.location ?? "";
-  li.querySelector(".feedback-author").textContent = location
-    ? `${author}, ${location}`
-    : author;
-}
-
 function updateNavState(totalPages) {
   if (prevBtn) prevBtn.disabled = currentPage <= 0;
   if (nextBtn) nextBtn.disabled = currentPage >= totalPages - 1;
@@ -67,10 +51,9 @@ function renderPage() {
   const slice = allItems.slice(start, start + visible);
 
   listRef.replaceChildren();
+
   for (const item of slice) {
-    listRef.insertAdjacentHTML("beforeend", buildItemMarkup());
-    const isFirst = allItems[0]?.id === item.id;
-    fillItem(listRef.lastElementChild, item, isFirst);
+    listRef.insertAdjacentHTML("beforeend", buildItemMarkup(item));
   }
 
   updateNavState(totalPages);
@@ -78,8 +61,7 @@ function renderPage() {
 
 function setLoading(isLoading) {
   if (loaderRef) loaderRef.hidden = !isLoading;
-  if (container)
-    container.setAttribute("aria-busy", isLoading ? "true" : "false");
+  if (body) body.setAttribute("aria-busy", isLoading ? "true" : "false");
 }
 
 function bindControls() {
@@ -112,14 +94,16 @@ function bindControls() {
   mqTablet.addEventListener("change", reRender);
 }
 
-export async function initSlider() {
+export async function initFeedback() {
   if (!listRef) {
     setLoading(false);
     return;
   }
 
+  setLoading(true);
+
   try {
-    const response = await apiClient.get("/feedbacks");
+    const response = await apiClient.get("/feedback");
     const data = response.data;
     allItems = Array.isArray(data) ? data : (data?.data ?? []);
     currentPage = 0;

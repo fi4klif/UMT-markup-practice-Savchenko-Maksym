@@ -1,37 +1,91 @@
 import { openOrderModal } from "./order.js";
 
 export default function initModal() {
-  const bouquetsContainer = document.querySelector(".bouquets-row");
-  const bestsellersContainer = document.querySelector(".bestsellers-gallery");
+  const bouquetsContainer =
+    document.querySelector(".bouquets-row") ||
+    document.getElementById("bouquets-list");
+  const bestsellersContainer =
+    document.querySelector(".bestsellers-gallery") ||
+    document.getElementById("bestsellers-list");
 
   const modalWrapper = document.getElementById("modal-wrapper");
   const modalContent = document.querySelector(".modal-content-container");
 
   if (!modalWrapper || !modalContent) return;
 
-  function toggleModal() {
-    modalWrapper.classList.toggle("is-open");
+  let lastFocusedElement = null;
 
-    if (modalWrapper.classList.contains("is-open")) {
+  function toggleModal() {
+    const isOpen = modalWrapper.classList.toggle("is-open");
+
+    if (isOpen) {
+      lastFocusedElement = document.activeElement;
       document.body.classList.add("modal-open");
+      const firstFocusable = modalWrapper.querySelector(
+        "button, input, [tabindex='0']",
+      );
+      if (firstFocusable) firstFocusable.focus();
     } else {
       document.body.classList.remove("modal-open");
+      if (lastFocusedElement) lastFocusedElement.focus();
     }
   }
 
+  function closeModal() {
+    if (modalWrapper.classList.contains("is-open")) {
+      toggleModal();
+    }
+  }
+
+  function setupModalCloseHandlers() {
+    modalWrapper.addEventListener("click", (e) => {
+      if (
+        e.target === modalWrapper ||
+        e.target.closest("[data-modal-close]") ||
+        e.target.closest(".modal-close-btn") ||
+        e.target.closest(".close-btn")
+      ) {
+        closeModal();
+      }
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeModal();
+      }
+    });
+  }
+
   function handleCardClick(e) {
-    const parentItem = e.target.closest("li");
+    const parentItem =
+      e.target.closest("li") || e.target.closest(".product-card");
     if (!parentItem) return;
 
-    const titleElement = parentItem.querySelector("h3");
-    if (!titleElement) return;
-    const title = titleElement.textContent;
+    if (
+      e.target.closest("button") &&
+      !e.target.closest("[data-product-trigger]")
+    )
+      return;
 
-    const text = parentItem.querySelector("p:first-of-type").textContent;
-    const price = parentItem.querySelector("p:last-of-type").textContent;
+    const titleElement =
+      parentItem.querySelector("h3") ||
+      parentItem.querySelector(".product-card-title");
+    if (!titleElement) return;
+    const title = titleElement.textContent.trim();
+
+    const textElement =
+      parentItem.querySelector(".product-card-text") ||
+      parentItem.querySelector("p:first-of-type");
+    const text = textElement ? textElement.textContent.trim() : "";
+
+    const priceElement =
+      parentItem.querySelector(".product-card-price") ||
+      parentItem.querySelector("p:last-of-type");
+    const price = priceElement ? priceElement.textContent.trim() : "";
 
     const imgElement = parentItem.querySelector("img");
-    const src = imgElement.getAttribute("src");
+    if (!imgElement) return;
+    const src = imgElement.getAttribute("src") || "";
     const srcset = imgElement.getAttribute("srcset") || "";
 
     const markup = `
@@ -55,21 +109,18 @@ export default function initModal() {
     const openOrderBtn = document.getElementById("open-order-btn");
     if (openOrderBtn) {
       openOrderBtn.addEventListener("click", () => {
-        toggleModal();
+        closeModal();
         openOrderModal();
       });
     }
   }
 
-  if (bouquetsContainer)
+  if (bouquetsContainer) {
     bouquetsContainer.addEventListener("click", handleCardClick);
-  if (bestsellersContainer)
+  }
+  if (bestsellersContainer) {
     bestsellersContainer.addEventListener("click", handleCardClick);
+  }
 
-  const closeBtn = modalWrapper.querySelector(".modal-close-btn");
-  if (closeBtn) closeBtn.addEventListener("click", toggleModal);
-
-  modalWrapper.addEventListener("click", (e) => {
-    if (e.target === modalWrapper) toggleModal();
-  });
+  setupModalCloseHandlers();
 }

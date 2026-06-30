@@ -7,15 +7,15 @@ import {
   suppressHoverUntilLeave,
 } from "./utils.js";
 
+const bouquetsList = document.getElementById("bouquets-list");
+const bouquetsListShell = document.querySelector(".bouquets-list-shell");
+const loaderRef = document.getElementById("bouquets-loader");
+const showMoreButton = document.querySelector(".bouquets-btn");
+const endMessage = document.querySelector(".bouquets-end-message");
+
 const itemsPerPage = 8;
 const showMoreButtonDefaultLabel = "Show More";
 const showMoreButtonLoadingLabel = "Loading...";
-
-const bouquetsList = document.getElementById("bouquets-list");
-const bouquetsListShell = document.querySelector(".bouquets-list-shell");
-const bouquetsLoader = document.getElementById("bouquets-loader");
-const showMoreButton = document.querySelector(".bouquets-show-more-button");
-const endMessage = document.querySelector(".bouquets-end-message");
 
 const state = {
   currentPage: 0,
@@ -24,46 +24,26 @@ const state = {
   staticCache: null,
 };
 
-function buildBouquetsListItemShellMarkup() {
+function createBouquetserHTML(product) {
+  const photoURL = product.photoURL || product.img1x;
+  const photoURL2x = product.photoURL2x || product.img2x;
+  const image1x = resolveImageUrl(photoURL);
+  const image2x = resolveImageUrl(photoURL2x);
+  const altText = product.alt ?? product.title ?? "";
+
   return `
 		<li class="bouquets-item">
 			<article class="product-card" tabindex="0" role="button" data-product-trigger>
-				<img loading="lazy" class="bouquets-card-image" alt="">
+				<img loading="lazy" src="${image1x}" ${image2x ? `srcset="${image2x} 2x"` : ""} class="bouquets-card-image" alt="${altText}">
 				<div class="product-card-content">
-					<div class="product-card-header">
-						<h3 class="product-card-title"></h3>
-						<p class="product-card-text"></p>
+					<div class="product-card-wrapper">
+						<h3 class="product-card-title"> ${product.title ?? ""}</h3>
+						<p class="product-card-text"> ${product.description ?? ""}</p>
 					</div>
-					<p class="product-card-price"></p>
+					<p class="product-card-price"> ${formatPriceUsd(product.price)}</p>
 				</div>
 			</article>
 		</li>`;
-}
-
-function fillBouquetsListItem(listItem, product) {
-  const image = listItem.querySelector(".bouquets-card-image");
-  const photo2x = resolveImageUrl(product.photoURL2x);
-  if (photo2x) {
-    image.setAttribute("srcset", `${photo2x} 2x`);
-  }
-  image.src = resolveImageUrl(product.photoURL);
-  image.alt = product.alt ?? product.title ?? "";
-
-  listItem.querySelector(".product-card-title").textContent =
-    product.title ?? "";
-  listItem.querySelector(".product-card-text").textContent =
-    product.description ?? "";
-  listItem.querySelector(".product-card-price").textContent = formatPriceUsd(
-    product.price,
-  );
-
-  const card = listItem.querySelector(".product-card");
-  if (product.id != null) {
-    card.dataset.bouquetId = String(product.id);
-  }
-  if (product.descriptionLong) {
-    card.dataset.descLong = product.descriptionLong;
-  }
 }
 
 function setShowMoreButtonLoading(isLoading) {
@@ -76,7 +56,7 @@ function setShowMoreButtonLoading(isLoading) {
 }
 
 function setBouquetsInitialLoading(isLoading) {
-  if (bouquetsLoader) bouquetsLoader.hidden = !isLoading;
+  if (loaderRef) loaderRef.hidden = !isLoading;
   if (bouquetsListShell)
     bouquetsListShell.setAttribute("aria-busy", isLoading ? "true" : "false");
 }
@@ -88,18 +68,14 @@ function updateEndState() {
 
 function appendChunk(items) {
   if (!items.length) return;
-  const beforeCount = bouquetsList.children.length;
   const chunkMarkup = items
-    .map(() => buildBouquetsListItemShellMarkup())
+    .map((product) => createBouquetserHTML(product))
     .join("");
   bouquetsList.insertAdjacentHTML("beforeend", chunkMarkup);
-  const listItems = bouquetsList.querySelectorAll(":scope > .bouquets-item");
-  for (let i = 0; i < items.length; i += 1) {
-    fillBouquetsListItem(listItems[beforeCount + i], items[i]);
-  }
 }
 
 async function fetchPage(page) {
+  // 1. Якщо ми ВЖЕ завантажили всі дані раніше — беремо їх з кешу
   if (state.staticCache) {
     const start = (page - 1) * state.perPage;
     const slice = state.staticCache.slice(start, start + state.perPage);
@@ -107,26 +83,37 @@ async function fetchPage(page) {
     return slice;
   }
 
-  const response = await apiClient.get("/bouquets", {
-    params: { page, perPage: state.perPage },
-  });
+  // 2. Робимо чистий запит БЕЗ параметрів (саме туди, куди ти казав)
+  const response = await apiClient.get("/bouquets");
   const data = response.data;
 
-  if (data && Array.isArray(data.data)) {
-    state.hasMore = data.meta?.hasNextPage === true;
-    return data.data;
-  }
-
+  // 3. Знаходимо наш масив (на випадок, якщо він обгорнутий)
+  let itemsArray = [];
   if (Array.isArray(data)) {
-    state.staticCache = data;
-    const start = (page - 1) * state.perPage;
-    const slice = data.slice(start, start + state.perPage);
-    state.hasMore = start + state.perPage < data.length;
-    return slice;
+    itemsArray = data;
+  } else if (data && Array.isArray(data.data)) {
+    itemsArray = data.data;
+  } else if (data && Array.isArray(data.bouquets)) {
+    itemsArray = data.bouquets;
   }
 
-  state.hasMore = false;
-  return [];
+  // Якщо нічого немає
+  if (!itemsArray || itemsArray.length === 0) {
+    state.hasMore = false;
+    return [];
+  }
+
+  // 4. Зберігаємо ВЕСЬ завантажений масив у кеш
+  state.staticCache = itemsArray;
+
+  // 5. Відрізаємо шматок тільки для поточної сторінки
+  const start = (page - 1) * state.perPage;
+  const slice = itemsArray.slice(start, start + state.perPage);
+
+  // 6. Перевіряємо, чи залишилися ще букети для кнопки "Show More"
+  state.hasMore = start + state.perPage < itemsArray.length;
+
+  return slice;
 }
 
 async function loadNextPage() {
@@ -180,7 +167,6 @@ async function handleShowMoreClick() {
 }
 
 export function initBouquets() {
-  if (!bouquetsList || !showMoreButton) return;
   showMoreButton.addEventListener("click", handleShowMoreClick);
   loadInitial();
 }
