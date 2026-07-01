@@ -21,7 +21,6 @@ const state = {
   currentPage: 0,
   perPage: itemsPerPage,
   hasMore: true,
-  staticCache: null,
 };
 
 function createBouquetserHTML(product) {
@@ -75,50 +74,36 @@ function appendChunk(items) {
 }
 
 async function fetchPage(page) {
-  // 1. Якщо ми ВЖЕ завантажили всі дані раніше — беремо їх з кешу
-  if (state.staticCache) {
-    const start = (page - 1) * state.perPage;
-    const slice = state.staticCache.slice(start, start + state.perPage);
-    state.hasMore = start + state.perPage < state.staticCache.length;
-    return slice;
-  }
-
-  // 2. Робимо чистий запит БЕЗ параметрів (саме туди, куди ти казав)
-  const response = await apiClient.get("/bouquets");
+  const response = await apiClient.get(
+    `/bouquets?_page=${page}&_per_page=${state.perPage}`,
+  );
   const data = response.data;
 
-  // 3. Знаходимо наш масив (на випадок, якщо він обгорнутий)
   let itemsArray = [];
-  if (Array.isArray(data)) {
-    itemsArray = data;
-  } else if (data && Array.isArray(data.data)) {
+
+  if (data && Array.isArray(data.data)) {
     itemsArray = data.data;
+    state.hasMore = data.next !== null;
+  } else if (Array.isArray(data)) {
+    itemsArray = data;
+    state.hasMore = itemsArray.length === state.perPage;
   } else if (data && Array.isArray(data.bouquets)) {
     itemsArray = data.bouquets;
+    state.hasMore = itemsArray.length === state.perPage;
   }
 
-  // Якщо нічого немає
   if (!itemsArray || itemsArray.length === 0) {
     state.hasMore = false;
     return [];
   }
 
-  // 4. Зберігаємо ВЕСЬ завантажений масив у кеш
-  state.staticCache = itemsArray;
-
-  // 5. Відрізаємо шматок тільки для поточної сторінки
-  const start = (page - 1) * state.perPage;
-  const slice = itemsArray.slice(start, start + state.perPage);
-
-  // 6. Перевіряємо, чи залишилися ще букети для кнопки "Show More"
-  state.hasMore = start + state.perPage < itemsArray.length;
-
-  return slice;
+  return itemsArray;
 }
 
 async function loadNextPage() {
   const targetPage = state.currentPage + 1;
   const items = await fetchPage(targetPage);
+
   if (items.length > 0) {
     appendChunk(items);
     state.currentPage = targetPage;
@@ -134,7 +119,7 @@ async function loadInitial() {
   bouquetsList.replaceChildren();
   state.currentPage = 0;
   state.hasMore = true;
-  state.staticCache = null;
+
   if (showMoreButton) showMoreButton.hidden = true;
   if (endMessage) endMessage.hidden = true;
 
@@ -167,6 +152,8 @@ async function handleShowMoreClick() {
 }
 
 export function initBouquets() {
-  showMoreButton.addEventListener("click", handleShowMoreClick);
+  if (showMoreButton) {
+    showMoreButton.addEventListener("click", handleShowMoreClick);
+  }
   loadInitial();
 }

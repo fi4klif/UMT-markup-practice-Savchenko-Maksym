@@ -13,12 +13,11 @@ function ensureNotificationRoot() {
 
 function buildNotification(message, variant) {
   const element = document.createElement("div");
-  element.className = `notification notification--${variant}`;
+  element.className = `notification notification-${variant}`;
   element.textContent = message;
   return element;
 }
 
-// Додано export
 export function showErrorNotification(message) {
   const root = ensureNotificationRoot();
   const element = buildNotification(message, "error");

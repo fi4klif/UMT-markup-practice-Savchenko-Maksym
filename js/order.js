@@ -1,3 +1,10 @@
+import { apiClient } from "./apiClient.js";
+import {
+  showErrorNotification,
+  showSuccessNotification,
+} from "./notifications.js";
+import { extractErrorMessage } from "./utils.js";
+
 const orderModalWrapper = document.getElementById("order-modal-wrapper");
 
 export function openOrderModal() {
@@ -29,35 +36,91 @@ export default function initOrderModal() {
   });
 
   const orderBtn = orderModalWrapper.querySelector(".order-btn");
+  const userName = document.getElementById("userName");
+  const userPhone = document.getElementById("userPhone");
+  const userAddress = document.getElementById("userAddress");
+  const agreement = document.getElementById("orderAgreement");
+  const userMessage = document.getElementById("userMessage");
 
-  const requiredInputs = orderModalWrapper.querySelectorAll("input[required]");
-
-  requiredInputs.forEach((input) => {
-    input.addEventListener("input", () => {
-      input.classList.remove("is-error");
-    });
+  [userName, userPhone, userAddress, agreement].forEach((el) => {
+    if (el) {
+      el.addEventListener("input", () => el.classList.remove("is-error"));
+      el.addEventListener("change", () => el.classList.remove("is-error"));
+    }
   });
 
   if (orderBtn) {
-    orderBtn.addEventListener("click", (e) => {
+    orderBtn.addEventListener("click", async (e) => {
       e.preventDefault();
       let isValid = true;
+      let errorMessage = "";
 
-      requiredInputs.forEach((input) => {
-        const value = input.value.trim();
+      [userName, userPhone, userAddress, agreement].forEach((el) =>
+        el?.classList.remove("is-error"),
+      );
 
-        if (value === "") {
-          input.classList.add("is-error");
-          isValid = false;
+      if (!userName?.value.trim() || userName.value.trim().length < 2) {
+        userName.classList.add("is-error");
+        isValid = false;
+        if (!errorMessage)
+          errorMessage = "Please enter a valid name (min 2 characters).";
+      }
+
+      const phoneRegex = /^\+?[0-9\s\-\(\)]{9,20}$/;
+      if (
+        !userPhone?.value.trim() ||
+        !phoneRegex.test(userPhone.value.trim())
+      ) {
+        userPhone.classList.add("is-error");
+        isValid = false;
+        if (!errorMessage) errorMessage = "Please enter a valid phone number.";
+      }
+
+      if (!userAddress?.value.trim() || userAddress.value.trim().length < 5) {
+        userAddress.classList.add("is-error");
+        isValid = false;
+        if (!errorMessage)
+          errorMessage = "Please enter a valid address (min 5 characters).";
+      }
+
+      if (!agreement?.checked) {
+        agreement.classList.add("is-error");
+        isValid = false;
+        if (!errorMessage)
+          errorMessage = "You must agree to the Terms and Conditions.";
+      }
+
+      if (!isValid) {
+        showErrorNotification(errorMessage);
+        return;
+      }
+
+      try {
+        orderBtn.disabled = true;
+
+        showSuccessNotification("Order placed successfully!");
+
+        [userName, userPhone, userAddress, userMessage].forEach((el) => {
+          if (el) el.value = "";
+        });
+
+        if (agreement) {
+          agreement.checked = false;
+          const iconUnchecked =
+            agreement.parentElement.querySelector(".icon-unchecked");
+          const iconChecked =
+            agreement.parentElement.querySelector(".icon-checked");
+          if (iconUnchecked && iconChecked) {
+            iconUnchecked.style.display = "block";
+            iconChecked.style.display = "none";
+          }
         }
-      });
-      if (isValid) {
-        console.log("Замовлення успішно оформлено!");
-
-        const allInputs = orderModalWrapper.querySelectorAll("input, textarea");
-        allInputs.forEach((input) => (input.value = ""));
 
         closeOrderModal();
+      } catch (error) {
+        showErrorNotification(extractErrorMessage(error, "Order failed."));
+      } finally {
+        orderBtn.disabled = false;
       }
     });
   }
