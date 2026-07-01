@@ -10,6 +10,10 @@
     />
     <!--  Style  -->
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/color.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/shared.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css"
@@ -18,8 +22,8 @@
       referrerpolicy="no-referrer"
     />
 
-    <!-- AOT --> 
-      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- AOT -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
     <!-- Fonts  -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -34,11 +38,11 @@
     />
 
     <!-- Preload  -->
-    <link rel="icon" href="/image/favicon.png" />
+    <link rel="icon" href="image/favicon.png" />
     <link
       rel="preload"
       as="image"
-      href="/image/hero-image@1x.webp"
+      href="image/hero-image@1x.webp"
       fetchpriority="high"
     />
   </head>
@@ -89,7 +93,7 @@
                 bouquet. Our expertly crafted arrangements are designed to bring
                 joy and elegance to your celebrations.
               </p>
-              <a class="btn bestsellers-btn" type="button" href="#bestsellers">
+              <a class="btn bestsellers-btn" href="#bestsellers">
                 Explore Our Bestsellers
               </a>
             </div>
@@ -114,15 +118,15 @@
             <picture>
               <source
                 srcset="
-                  /image/right-image-mob@1x.webp 1x,
-                  /image/right-image-mob@2x.webp 2x
+                  image/right-image-mob@1x.webp 1x,
+                  image/right-image-mob@2x.webp 2x
                 "
                 media="(max-width: 767px)"
               />
               <img
-                src="/image/right-image@1x.jpg"
-                srcset="/image/right-image@2x.webp 2x"
-                alt="passion Image"
+                src="image/right-image@1x.jpg"
+                srcset="image/right-image@2x.webp 2x"
+                alt="Floral arrangement with tulips and roses"
                 class="passion-image"
                 width="600"
                 height="428"
@@ -137,15 +141,16 @@
           <div class="bestsellers-wrapper">
             <h2>Top-Selling Bouquets</h2>
             <div class="bestsellers-body" aria-busy="true">
-						<div
-							id="bestsellers-loader"
-							class="content-loader"
-							role="status"
-							aria-live="polite"
-							aria-label="Loading top bouquets"
-						>
-							<span class="content-loader__spinner" aria-hidden="true"></span>
-						</div>
+              <div
+                id="bestsellers-loader"
+                class="content-loader"
+                role="status"
+                aria-live="polite"
+                aria-label="Loading top bouquets"
+              >
+                <span class="content-loader__spinner" aria-hidden="true"></span>
+              </div>
+            </div>
             <div class="bestsellers-info">
               <ul class="bestsellers-gallery" id="bestsellers-container">
                 <!-- generate bestsellers -->
@@ -203,20 +208,16 @@
                 <span class="content-loader__spinner" aria-hidden="true"></span>
               </div>
             </div>
-             <ul
-                class="bouquets-row"
-                id="bouquets-list"
-                aria-live="polite"
-              ></ul>
-              <!-- Динамічно генеруються bouquets -->
-            </div>
+            <ul class="bouquets-row" id="bouquets-list" aria-live="polite"></ul>
+            <!-- Динамічно генеруються bouquets -->
             <button
-            class="btn bouquets-btn"
-            type="button"
-            aria-label="show more"
-            id="bouquets-load-more"
-          >Show More
-          </button>
+              class="btn bouquets-btn"
+              type="button"
+              aria-label="show more"
+              id="bouquets-load-more"
+            >
+              Show More
+            </button>
           </div>
         </div>
       </section>
@@ -235,8 +236,7 @@
                 <span class="content-loader__spinner" aria-hidden="true"></span>
               </div>
             </div>
-            <ul class="feedback-list" id="feedback-list">
-            </ul>
+            <ul class="feedback-list" id="feedback-list"></ul>
 
             <div class="paggination">
               <button
@@ -314,14 +314,14 @@
             <picture>
               <source
                 srcset="
-                  /image/contact-mob@1x.webp 1x,
-                  /image/contact-mob@2x.webp 2x
+                  image/contact-mob@1x.webp 1x,
+                  image/contact-mob@2x.webp 2x
                 "
                 media="(max-width: 767px)"
               />
               <img
-                src="/image/contact@1x.jpg"
-                srcset="/image/contact@2x.webp 2x"
+                src="image/contact@1x.jpg"
+                srcset="image/contact@2x.webp 2x"
                 alt="Contact Image"
                 class="contacts-image"
                 width="1260"
@@ -356,14 +356,14 @@
             <li><a class="mob-link" href="#feedback">Feedback</a></li>
             <li><a class="mob-link" href="#contacts">Contacts</a></li>
           </ul>
-          <a class="btn menu-btn" type="button" href="#bouqets">Explore Bouquets</a>
+          <a class="btn menu-btn" href="#bouqets">Explore Bouquets</a>
         </div>
       </div>
     </div>
 
     <div id="modal-wrapper" class="modal-wrapper">
       <div class="modal-container">
-        <button type="button" class="modal-close-btn" id="modal-close-btn">
+        <button type="button" class="modal-close-btn">
           <svg><use href="icons/sprite.svg#x"></use></svg>
         </button>
         <div class="modal-content-container"></div>
@@ -372,7 +372,7 @@
 
     <form id="order-modal-wrapper" class="modal-wrapper">
       <div class="modal-order-container">
-        <button type="button" class="modal-close-btn" id="modal-close-btn">
+        <button type="button" class="modal-close-btn">
           <svg><use href="icons/sprite.svg#x"></use></svg>
         </button>
         <div class="order-content-container">
@@ -388,6 +388,7 @@
                     name="userName"
                     placeholder="Ann"
                     required
+                    autocomplete="name"
                   />
                   <span class="error-message">Name is required</span>
                 </div>
@@ -415,6 +416,7 @@
                     id="userAddress"
                     name="userAddress"
                     placeholder="456 Floral Ave, Sydney NSW 2000 AU"
+                    autocomplete="tel"
                   />
                   <span class="error-message"
                     >Please enter a valid address</span
@@ -428,6 +430,7 @@
                     name="userMessage"
                     id="userMessage"
                     placeholder="Type your message..."
+                    autocomplete="street-address"
                   ></textarea>
                 </div>
               </li>
@@ -455,9 +458,11 @@
                 </label>
               </li>
 
-              <button class="btn order-btn" type="submit">
-                Go to Checkout
-              </button>
+              <li>
+                <button class="btn order-btn" type="submit">
+                  Go to Checkout
+                </button>
+              </li>
             </ul>
           </div>
         </div>
@@ -531,7 +536,7 @@
       </div>
     </footer>
 
-    <script type="module" src="./js/main.js" defer></script>
+    <script type="module" src="./js/main.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
       AOS.init({
