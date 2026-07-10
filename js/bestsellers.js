@@ -37,22 +37,13 @@ function getTotalPages() {
 }
 
 function createBestsellerHTML(product) {
-  const photoURL = product.photoURL || product.img1x;
-  const photoURL2x = product.photoURL2x || product.img2x;
-  const image1x = resolveImageUrl(photoURL);
-  const image2x = resolveImageUrl(photoURL2x);
+  const imageUrl = resolveImageUrl(product.image);
   const altText = product.alt ?? product.title ?? "";
 
   return `
     <li class="product-item">
-      <article class="product-card" tabindex="0" role="button" data-product-trigger ${product.id != null ? `data-bouquet-id="${product.id}"` : ""}>
-        <img
-          loading="lazy"
-          class="bestsellers-card-image"
-          src="${image1x}"
-          ${image2x ? `srcset="${image2x} 2x"` : ""}
-          alt="${altText}"
-        />
+      <article class="product-card" tabindex="0" role="button" data-product-trigger data-bouquet-id="${product.id}">
+        <img loading="lazy" class="bestsellers-card-image" src="${imageUrl}" alt="${altText}" />
         <div class="product-card-content">
           <div class="product-card-header">
             <h3 class="product-card-title">${product.title ?? ""}</h3>
@@ -167,7 +158,7 @@ export async function initBestsellers() {
   setLoading(true);
 
   try {
-    const response = await apiClient.get("/bestsellers");
+    const response = await apiClient.get("/bouquets/bestsellers");
     const data = response.data;
     allItems = Array.isArray(data) ? data : (data?.data ?? []);
     currentPage = 0;

@@ -24,25 +24,22 @@ const state = {
 };
 
 function createBouquetserHTML(product) {
-  const photoURL = product.photoURL || product.img1x;
-  const photoURL2x = product.photoURL2x || product.img2x;
-  const image1x = resolveImageUrl(photoURL);
-  const image2x = resolveImageUrl(photoURL2x);
+  const imageUrl = resolveImageUrl(product.image);
   const altText = product.alt ?? product.title ?? "";
 
   return `
-		<li class="bouquets-item">
-			<article class="product-card" tabindex="0" role="button" data-product-trigger>
-				<img loading="lazy" src="${image1x}" ${image2x ? `srcset="${image2x} 2x"` : ""} class="bouquets-card-image" alt="${altText}">
-				<div class="product-card-content">
-					<div class="product-card-wrapper">
-						<h3 class="product-card-title"> ${product.title ?? ""}</h3>
-						<p class="product-card-text"> ${product.description ?? ""}</p>
-					</div>
-					<p class="product-card-price"> ${formatPriceUsd(product.price)}</p>
-				</div>
-			</article>
-		</li>`;
+    <li class="bouquets-item">
+        <article class="product-card" tabindex="0" role="button" data-product-trigger>
+            <img loading="lazy" src="${imageUrl}" class="bouquets-card-image" alt="${altText}">
+            <div class="product-card-content">
+                <div class="product-card-wrapper">
+                    <h3 class="product-card-title">${product.title ?? ""}</h3>
+                    <p class="product-card-text">${product.description ?? ""}</p>
+                </div>
+                <p class="product-card-price">${formatPriceUsd(product.price)}</p>
+            </div>
+        </article>
+    </li>`;
 }
 
 function setShowMoreButtonLoading(isLoading) {
@@ -75,7 +72,7 @@ function appendChunk(items) {
 
 async function fetchPage(page) {
   const response = await apiClient.get(
-    `/bouquets?_page=${page}&_per_page=${state.perPage}`,
+    `/bouquets?page=${page}&limit=${state.perPage}`,
   );
   const data = response.data;
 

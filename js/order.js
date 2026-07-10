@@ -97,6 +97,12 @@ export default function initOrderModal() {
 
       try {
         orderBtn.disabled = true;
+        await apiClient.post("/order", {
+          name: userName.value.trim(),
+          phone: userPhone.value.trim(),
+          address: userAddress.value.trim(),
+          message: userMessage?.value.trim() || "",
+        });
 
         showSuccessNotification("Order placed successfully!");
 
