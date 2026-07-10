@@ -7,7 +7,6 @@ import { initBestsellers } from "./bestsellers.js";
 import { initFeedback } from "./feedback.js";
 import "./apiClient.js";
 import "./notifications.js";
-import axios from "axios";
 
 document.addEventListener("DOMContentLoaded", async () => {
   initMenu();

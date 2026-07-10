@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  base: "/UMT-markup-practice-Savchenko-Maksym/",
+  base: "./",
   server: {
     port: 3000,
     proxy: {
