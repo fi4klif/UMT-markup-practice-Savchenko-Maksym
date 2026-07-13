@@ -1,25 +1,12 @@
-Project README
-English | Українська
-
 # Flora - Flower Shop Landing Page
 
-Project Title
-Flora - Flower Shop Landing Page
 [English](#english) | [Українська](#українська)
 
-Live Preview & Figma Links
-Live Preview: [Insert Live URL here]
-
----
-
-Figma Project: [Insert Figma Link here]
+- [Live Preview](https://fi4klif.github.io/UMT-markup-practice-Savchenko-Maksym/)
+- [Figma](https://www.figma.com/design/2Tj16H7IO7dq1ViTvIh57V/Flora?node-id=5999-10563&p=f&t=NXqhW9cuJ0NWbx59-0)
+- [Backend](https://github.com/fi4klif/Flora-backend)
 
 ## <a name="english"></a>🇬🇧 English
-
-### Live Preview & Figma Links
-
-- **Live Preview:** [Insert Live URL here]
-- **Figma Project:** [Insert Figma Link here]
 
 ### Short Description
 
@@ -98,26 +85,16 @@ Footer: Subscription form, contact information, and social links.
 Modals: Order placement modal and interactive feedback forms.
 
 ### Tech Stack
+
 - Languages: HTML5, CSS3, JavaScript (ES6+).
 - Tooling: Vite (module bundler).
 - HTTP Client: Axios (for API requests).
 - Data Handling: JSON Server (as a mock backend).
 - Styling: Modular CSS architecture (Reset, Shared, Fonts, Colors).
 
-
 ---
 
-Посилання на Live Preview та Figma
-Live Preview: [Вкажіть посилання на сайт]
-
 ## <a name="українська"></a>🇺🇦 Українська
-
-Figma: [Вкажіть посилання на Figma]
-
-### Посилання на Live Preview та Figma
-
-- **Live Preview:** [Вкажіть посилання на сайт]
-- **Figma:** [Вкажіть посилання на Figma]
 
 ### Короткий опис
 
@@ -188,6 +165,7 @@ Flora — це адаптивний веб-додаток, розроблени�
 Футер: Форма підписки, контактна інформація та посилання на соцмережі.
 
 ### Технологічний стек
+
 - Мови: HTML5, CSS3, JavaScript (ES6+).
 - Інструменти: Vite (збирач модулів).
 - HTTP-клієнт: Axios (для API-запитів).

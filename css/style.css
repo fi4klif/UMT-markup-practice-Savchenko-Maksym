@@ -167,7 +167,14 @@ textarea.is-error + .error-message {
   display: flex;
   flex-direction: row;
   gap: 16px;
-  margin-left: auto;
+  align-items: center;
+  justify-items: center;
+}
+
+.feedback-paggination {
+  display: flex;
+  gap: 16px;
+  justify-content: right;
 }
 
 .flower {
@@ -412,7 +419,6 @@ header .nav-wrapper {
 }
 
 /* Hero */
-
 .hero-wrapper {
   background-image: url("../image/hero-image@1x.webp");
   background-color: var(--white-color);
@@ -480,11 +486,6 @@ header .nav-wrapper {
 .bestsellers-gallery {
   gap: 24px;
   display: flex;
-  overflow-x: hidden;
-}
-
-.bestsellers-gallery::-webkit-scrollbar {
-  display: none;
 }
 
 .bestsellers-card-image {
@@ -513,6 +514,7 @@ header .nav-wrapper {
 }
 
 .product-card-text {
+  display: none;
   margin-bottom: 16px;
   font-size: 14px;
 }
@@ -526,8 +528,9 @@ header .nav-wrapper {
 .bestsellers-nav {
   margin-top: 32px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  gap: 24px;
 }
 
 /*  bouquets  */
@@ -592,8 +595,12 @@ header .nav-wrapper {
 .feedback-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 32px;
+}
+
+.feedback-wrapper h2 {
+  display: flex;
+  justify-content: center;
 }
 
 .feedback-list {
@@ -1233,7 +1240,7 @@ footer .section-wrapper {
 
   /* Hero */
   .hero-wrapper {
-    background-position: 60% center;
+    background-position: 100% center;
     min-height: 669px;
   }
 

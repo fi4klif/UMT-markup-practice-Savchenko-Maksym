@@ -76,8 +76,7 @@ function renderDots(totalPages) {
   if (!dotsRef) return;
   dotsRef.innerHTML = "";
 
-  const maxDots = 6;
-  const windowSize = Math.min(totalPages, maxDots);
+  const windowSize = Math.min(totalPages);
   let start = Math.max(0, currentPage - Math.floor(windowSize / 2));
   const end = Math.min(totalPages, start + windowSize);
   start = Math.max(0, end - windowSize);
