@@ -2,7 +2,7 @@
 
 [English](#english) | [Українська](#українська)
 
-- [Live Preview](https://fi4klif.github.io/UMT-markup-practice-Savchenko-Maksym/)
+- [Live Preview](https://fi4klif.github.io/Flora-Frontend/)
 - [Figma](https://www.figma.com/design/2Tj16H7IO7dq1ViTvIh57V/Flora?node-id=5999-10563&p=f&t=NXqhW9cuJ0NWbx59-0)
 - [Backend](https://github.com/fi4klif/Flora-backend)
 
